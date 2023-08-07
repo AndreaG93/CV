@@ -14,7 +14,7 @@
 % -------------------------------------------------------------------------------- %
 % CV Colors...
 % -------------------------------------------------------------------------------- %
-\definecolor{CvColor}{RGB}{0, 0, 139}
+\definecolor{CvColor}{RGB}{0, 147, 202}
 
 % -------------------------------------------------------------------------------- %
 % Footer and Header...
@@ -40,7 +40,7 @@
 \newcommand{\CvEducation}[2]{ {\small \textit{#1}: #2}}
 
 % To add a bullet...
-\newcommand{\CvBullet}{\hspace{0.05cm} $\bullet$ \hspace{0.05cm}}
+\newcommand{\CvBullet}{\hspace{0.05cm} \textcolor{CvColor}{$\bullet$} \hspace{0.05cm}}
 
 % To design CV section...
 \newcommand{\CvSection}[2]{\vspace{0.5cm}
@@ -56,6 +56,10 @@
 % To desing experience as block...
 \newcommand{\FullBlock}{\textcolor{CvColor}{\mdlgblksquare}}
 \newcommand{\EmptyBlock}{\textcolor{CvColor}{\square}}
+
+% To customize "itemize" enviroment
+\renewcommand{\labelitemi}{$\textcolor{CvColor}{\circ}$}
+\renewcommand{\labelitemii}{$\textcolor{CvColor}{\bullet}$}
 
 % -------------------------------------------------------------------------------- %
 % Variables.
