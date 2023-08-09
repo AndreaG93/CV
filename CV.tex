@@ -3,30 +3,36 @@
 \usepackage{babel}
 \usepackage{fontawesome5}			% To add icons
 \usepackage{xcolor}					% To add colors
-\usepackage[scale=0.87]{geometry}	% To manage page margins
+\usepackage[scale=1]{geometry}      % To manage page margins
 \usepackage{graphicx} 				% To add graphics
 \usepackage[hidelinks]{hyperref}	% To add link
-\usepackage{stix}
-\usepackage{longtable}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
+\usepackage{stix}					% To add block fot skill matrix
+\usepackage{fancyhdr}				% To customize header and footer of the page
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage[most]{tcolorbox}
+\usepackage{paracol}
+
+\renewcommand{\familydefault}{\sfdefault}
 
 % -------------------------------------------------------------------------------- %
 % CV Colors...
 % -------------------------------------------------------------------------------- %
-\definecolor{CvColor}{RGB}{0, 147, 202}
+\definecolor{CvColor}{RGB}{211,48,93}
+\definecolor{CvSidebarBackColor}{RGB}{211,48,93}
+\definecolor{CvSidebarTextColor}{RGB}{255,255,255}
 
 % -------------------------------------------------------------------------------- %
 % Footer and Header...
 % -------------------------------------------------------------------------------- %
 
+\pagestyle{fancy}
+
 % clear existing header/footer entries
 \fancyhf{} 
 \renewcommand{\headrulewidth}{0pt}
 
-% Place Page X of Y on the right-hand
-% side of the footer
-\fancyfoot[R]{\textcolor{CvColor}{\rule[.5\baselineskip]{\textwidth}{1pt}} Page \textbf{\thepage} \hspace{1pt}}
+\fancyfoot[L]{\textcolor{CvColor}{\rule[.3\baselineskip]{0.95\textwidth}{1pt}} \quad  \textbf{Page \thepage}}
 
 % -------------------------------------------------------------------------------- %
 % Commands...
@@ -41,11 +47,17 @@
 
 % To add a bullet...
 \newcommand{\CvBullet}{\hspace{0.05cm} \textcolor{CvColor}{$\bullet$} \hspace{0.05cm}}
+\newcommand{\CvBulletForSidebar}{\hspace{0.05cm}\textcolor{CvSidebarTextColor}{$\bullet$}\hspace{0.05cm}
+	}
 
-% To design CV section...
+% Check symbol...
+\newcommand{\CvCheck}{\textcolor{CvColor}{\faCheck}}
+
 \newcommand{\CvSection}[2]{\vspace{0.5cm}
-	{\LARGE \textcolor{CvColor}{#1 \hspace{2pt} \textbf{#2}}} \\
-	\textcolor{CvColor}{\rule[.5\baselineskip]{0.5\textwidth}{0.5pt}}}
+	\begin{tcolorbox}[colback=CvSidebarBackColor,boxrule=0pt, top=2.5pt,bottom=2.5pt, arc=0pt,outer arc=0pt]
+	{\Large \textcolor{CvSidebarTextColor}{#1 \hspace{2pt} \textbf{#2}}}
+	\end{tcolorbox}
+	}
 
 % To design 'Time Range'...
 \newcommand{\CvTimeRange}[2]{\textcolor{CvColor}{\textsc{#1 - #2}}}
@@ -59,219 +71,333 @@
 
 % To customize "itemize" enviroment
 \renewcommand{\labelitemi}{$\textcolor{CvColor}{\circ}$}
-\renewcommand{\labelitemii}{$\textcolor{CvColor}{\bullet}$}
+\renewcommand{\labelitemii}{\textcolor{CvColor}{$\bullet$}}
 
 % -------------------------------------------------------------------------------- %
 % Variables.
 % -------------------------------------------------------------------------------- %
 
-\def\SidebarHSize{3.5cm}
-\def\BodyHSize{11cm}
-
-% -------------------------------------------------------------------------------- %
-% Longtable size (see documentation https://ctan.mirror.garr.it/mirrors/ctan/macros/latex/required/tools/longtable.pdf)
-% -------------------------------------------------------------------------------- %
-
-\setlength\LTpre{0.15cm}
-\setlength\LTpost{0.15cm}
+\def\SidebarHSizeFirstPage{2.5cm}
+\def\SidebarHSize{3.95cm}
+\def\BodyHSizeFirstPage{9cm}
+\def\BodyHSize{12.5cm}
 
 \begin{document}
-	
-	{\Huge \textcolor{CvColor!50}{\textbf{Andrea}} \textcolor{CvColor!80}{\scshape \textbf{Graziani}}} \hfill
-	\includegraphics[width=8em]{./Images/Photo.png} \\
-	\textcolor{CvColor}{\rule[.5\baselineskip]{\textwidth}{1pt}}
-	
-	% ================================================================================ %
-	% Personal Data
-	% ================================================================================ %
-	
-	\begin{tabular}{rlrl}
-		\textsc{Place and Date of Birth:} & Italy, 27 August 1993 \CvBullet \hspace{0.05cm} \textsc{Age}: 29 & \textsc{\faGithub} & \href{https://github.com/AndreaG93}{\texttt{AndreaG93}} \\
-		
-		\textsc{Address:} & Viale S. Francesca Saverio Cabrini, 8 & \textsc{\faLinkedin} & \href{https://it.linkedin.com/in/andrea-graziani-5134b8256}{\texttt{andrea-graziani-5134b8256}} \\
-		
-		& 00077 Monte Compatri (RM), Italy & \faCar & Driving licence B \CvBullet Car available \\
-		
-		\textsc{Phone:} & +(39)~333~78~58~512 && \\
-		\textsc{E-mail:} & \href{mailto:andrea.graziani.ing@outlook.com}{\texttt{andrea.graziani.ing@outlook.com}} && \\
-		\textsc{Nationality}: & Italy
-	\end{tabular}
-	
-	% ================================================================================ %
-	% Education
-	% ================================================================================ %
-	\CvSection{\faGraduationCap}{Education}
-	
-	% -------------------------------------------------------------------------------- %
-	% Master’s Degree
-	% -------------------------------------------------------------------------------- %
-	\begin{longtable}{p{\SidebarHSize}|p{\BodyHSize}}
-		\CvTimeRange{2018}{2022} & \textbf{Master’s Degree}, Computer engineering \\
-		& \textsc{Università degli Studi di ROMA ``Tor Vergata"} \\
-		& \textsc{LM-32 - 2nd level degree in Computer engineering}\\
-		& \\
-		& \CvEducation{Final degree mark}{\textbf{110/110 cum laude}} \\
-		& \CvEducation{Dissertation/thesis title}{``A QoS-aware broker for multi-provider serverless applications"} \CvBullet \CvEducation{Thesis supervisor}{Valeria Cardellini} \\
-		& \CvEducation{Age at graduation}{28} \CvBullet \CvEducation{Graduation date}{23/05/2022}	
-	\end{longtable}
-	
-	% -------------------------------------------------------------------------------- %
-	% Bachelor's degree
-	% -------------------------------------------------------------------------------- %
-	\begin{longtable}{p{\SidebarHSize}|p{\BodyHSize}}
-		\CvTimeRange{2012}{2018} & \textbf{Bachelor's degree}, Computer engineering \\
-		& \textsc{Università degli Studi di ROMA ``Tor Vergata"} \\
-		& \textsc{L-8 - 1st level degree in Information technology}\\
-		& \\
-		& \CvEducation{Final degree mark}{\textbf{102/110 cum laude}} \\	
-		& \CvEducation{Age at graduation}{25} \CvBullet \CvEducation{Graduation date}{26/10/2018}	
-	\end{longtable}
-		
-	% -------------------------------------------------------------------------------- %
-	% Diploma
-	% -------------------------------------------------------------------------------- %
-	\begin{longtable}{p{\SidebarHSize}|p{\BodyHSize}}
-		\CvTimeRange{2008}{2012} & \textbf{Italian Secondary School Diploma}, Scientific Certificate \\
-		& \textsc{Liceo Scientifico Statale Bruno Touschek} \\	
-		& \\
-		& \CvEducation{School-leaving examination mark}{\textbf{90/100}} \\
-		& \CvEducation{Graduation date}{2012}	
-	\end{longtable}
 
-	% ================================================================================ %
-	% Work Experience
-	% ================================================================================ %
-	\CvSection{\faBriefcase}{Work Experience}
-
-	\begin{longtable}{p{\SidebarHSize}|p{\BodyHSize}}
-		\CvTimeRange{June 2022}{Present} & \textbf{Software Engineer}, ALTEN Italia S.p.A. - Rome, Italy \\
-		& \\
-		& Acted as computer consultant for following companies: 
-		  \begin{itemize}
-			\item \textbf{ABB S.p.A.} - Rome, Italy \newline
-			\textbf{(June 2022 - June 2023)} \newline
-			To develop several web applications, acting as management software, used by some company departments in order to perform some task like data management, report extraction, scheduling activities and so on.
-			\begin{itemize}
-				\item Acted as software designer, developer, tester and coordinator of the projects.
-				\item Performed requirements gathering and technical documentation.
-				\item Handled production deployment, testing and technical support.
-				\item Started initiatives aimed at improving software development process.
-				\item Performed bug fixing.
-			\end{itemize}
-		\end{itemize} \\
-		& \begin{itemize}
-			\item \textbf{GF Machining Solutions S.p.A.} - Meyrin, Switzerland \newline
-			\textbf{(June 2023 - Present)} \newline
-			To develop a web application that allows users to setup, manage laser industrial machines for making metallurgical products.
-			\begin{itemize}
-				\item Acted as a developer.
-				\item Updated technical documentation.
-				\item Performed bug fixing.
-			\end{itemize}
-		\end{itemize}
-	\end{longtable}
-	
-	% ================================================================================ %
-	% Training
-	% ================================================================================ %
-	\CvSection{\faBook}{Training}
-	
-	\begin{longtable}{p{\SidebarHSize}|p{\BodyHSize}}
-		\CvDate{September 2022} & \textbf{RabbitMQ usage in event driven architecture} \\
-		& \textsc{Training course at ALTEN Italia S.p.A. (Rome, Italy)} \\
-		& \\	
-		& Introductory course on event-oriented architectures and how to configure and use a RabbitMQ cluster.
-	\end{longtable}
-	
-	% ================================================================================ %
-	% Language
-	% ================================================================================ %
-	\CvSection{\faLanguage}{Language}
-
-	\begin{longtable}{p{\SidebarHSize}|p{\BodyHSize}}
-		\CvDate{Mother tongue} & Italian \\
-		& \\
+\columnratio{.31}
+\begin{paracol}{2}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%      Contents sidebar      %%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	\begin{tcolorbox}[colback=CvSidebarBackColor,height=\textheight,boxrule=0pt, left=0pt,right=0pt,top=0pt,bottom=0pt, arc=0pt,outer arc=0pt]
+		\centering
+		\begin{tikzpicture}
+			\clip (0,0) circle (2cm) node {\includegraphics[width=4cm]{./Images/Photo.png}};
+			\draw[CvSidebarTextColor, line width=4pt] circle (2cm);
+		\end{tikzpicture}
 		
-		\CvDate{Foreign language(s)} & \begin{tabular}{c|c|c|c|c}
-			\textbf{Language} & \textbf{Listening} & \textbf{Reading} & \textbf{Writing} & \textbf{Speaking} \\
-			\hline 
-			&&&&\\		
-			English & \texttt{B1} & \texttt{B2} & \texttt{B2} & \texttt{B1} \\
+		\begin{quotation}
+			\textcolor{CvSidebarTextColor}
+			{\textsl{Seeking a position that allows me allow me to develop and design  software with ever greater autonomy.\\	
+			I would like to work with embedded system and real-time systems or develop applications using Linux.\\
+			I want to learn and apply DevOps development principles, in
+			order to ensure higher quality and maintainability of the
+			released software.
+			}}
+			
+		\end{quotation}
+
+		\textcolor{CvSidebarTextColor}{\rule[.5\baselineskip]{0.9\textwidth}{1.5pt}}
+
+		\begin{tabular}{c}
+			\\
+			\textcolor{CvSidebarTextColor}{\textbf{Place And Date of Birth}} \\
+			\textcolor{CvSidebarTextColor}{Frascati, Italy} \\
+			\textcolor{CvSidebarTextColor}{27 August 1993 \CvBulletForSidebar \textbf{Age}: 29} \\		
+			\\
+			\textcolor{CvSidebarTextColor}{\textbf{Address}} \\
+		    \textcolor{CvSidebarTextColor}{Viale S. Francesca Saverio Cabrini, 8} \\
+	        \textcolor{CvSidebarTextColor}{00077 Monte Compatri (RM), Italy} \\
+			\\
+			\textcolor{CvSidebarTextColor}{\textbf{Nationality}} \\		
+			\textcolor{CvSidebarTextColor}{Italy} \\\\		
+			\textcolor{CvSidebarTextColor}{\textbf{Driving Licence}} \\		
+			\textcolor{CvSidebarTextColor}{B \CvBulletForSidebar Car Available} \\\\	
 		\end{tabular}
-	\end{longtable} 
 	
-	% ================================================================================ %
-	% Computer Skill
-	% ================================================================================ %
-	\CvSection{\faLaptop}{Computer Skills}
-
-	% -------------------------------------------------------------------------------- %
-	% Programming Languages / Markup Languages
-	% -------------------------------------------------------------------------------- %
-	
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{Languages} &  \begin{tabular}{lcr}
-			\centering
-			& \textbf{Experience} & \textbf{Experience Years} \\
-			\hline
-			&& \\
-			\texttt{C} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 \\
-			\texttt{C++} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
-			\texttt{C\#} & $\FullBlock\FullBlock\FullBlock\FullBlock\EmptyBlock$ & 1.5 \\
-			\texttt{Java} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 \\
-			\texttt{Go} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 \\
-			\texttt{Python} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 \\
-			\texttt{Assembly MIPS} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
-			\texttt{Assembly x86} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
-			\texttt{HTML} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 \\
-			\texttt{CSS} & $\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
-			\LaTeX & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 5 \\
+		\textcolor{CvSidebarTextColor}{\rule[.5\baselineskip]{0.9\textwidth}{1.5pt}}
+		
+		\begin{tabular}{c}
+			\\
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			% Email
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			{\large \textcolor{CvSidebarTextColor}{\faEnvelope}} \\ \href{mailto:andrea.graziani.ing@outlook.com}{\textcolor{CvSidebarTextColor}{\texttt{andrea.graziani.ing@outlook.com}}} \\\\
+			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			% Phone
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			{\large \textcolor{CvSidebarTextColor}{\faPhone}} \\ 
+			\textcolor{CvSidebarTextColor}{+(39)~333~78~58~512} \\\\
+			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			% GitHub
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			{\large \textcolor{CvSidebarTextColor}{\textsc{\faGithub}}} \\ \href{https://github.com/AndreaG93}{\textcolor{CvSidebarTextColor}{\texttt{AndreaG93}}} \\\\
+			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			% Linkedin
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			{\large \textcolor{CvSidebarTextColor}{\textsc{\faLinkedin}}} \\ \href{https://it.linkedin.com/in/andrea-graziani-5134b8256}{\textcolor{CvSidebarTextColor}{\texttt{andrea-graziani-5134b8256}}} \\\\
+			
 		\end{tabular}
-	\end{longtable}
-	
-	% -------------------------------------------------------------------------------- %
-	% Other
-	% -------------------------------------------------------------------------------- %
-	
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{Cloud} & Apache OpenWhisk \BasicLevel \CvBullet AWS EC2 \BasicLevel \CvBullet AWS Lambda  \BasicLevel \CvBullet AWS Step Functions \BasicLevel \CvBullet AWS CloudWatch \BasicLevel \CvBullet SonarQube \BasicLevel
-	\end{longtable}
 		
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{Build automation} & Maven \BasicLevel \CvBullet CMake \BasicLevel
-	\end{longtable}
+		\textcolor{CvSidebarTextColor}{\rule[.5\baselineskip]{0.9\textwidth}{1.5pt}}
 		
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{Databases} & Microsoft SQL Server \MediumLevel \CvBullet PostgreSQL \MediumLevel \CvBullet InfluxDB \BasicLevel \CvBullet Apache Cassandra \BasicLevel \CvBullet Apache Kakfa \BasicLevel \\
-	\end{longtable}
+		\begin{tabular}{c}
+			\\
+		
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			% Available for business travels
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			{\large \textcolor{CvSidebarTextColor}{\faPlaneDeparture}} \\ 
+			\textcolor{CvSidebarTextColor}{Available for business travels} \\\\
+			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			% Available for business travels
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			{\large \textcolor{CvSidebarTextColor}{\faGlobeEurope}} \\ 
+			\textcolor{CvSidebarTextColor}{Available to relocate abroad} \\
+			\textcolor{CvSidebarTextColor}{\textbf{Europe only}}
+
+		\end{tabular}
+		
+	\end{tcolorbox}
+	\switchcolumn  %<--------
+	\begin{tcolorbox}[colback=white, height=\textheight,colframe=white, top=0pt,bottom=0pt]
+		
+		\vspace{1.5cm}
+		
+		{\Huge \textcolor{CvColor!50}{\textbf{Andrea}} \textcolor{CvColor!80}{\scshape \textbf{Graziani}}} \hfill \\
+		\textcolor{CvColor}{\rule[.5\baselineskip]{\textwidth}{2pt}}
+		
+		
+		\hfill {\Large \textcolor{CvColor!60}{\textit{SOFTWARE ENGINEER}}}
+		
+		\vspace{0.5cm}
+		      
+		% ================================================================================ %
+		% Education
+		% ================================================================================ %
+		\CvSection{\faGraduationCap}{Education}
+		
+		% -------------------------------------------------------------------------------- %
+		% Master’s Degree
+		% -------------------------------------------------------------------------------- %
+		\begin{tabular}{p{\SidebarHSizeFirstPage}|p{\BodyHSizeFirstPage}}
+			\CvTimeRange{2018}{2022} & \textbf{Master’s Degree}, Computer engineering \\
+			& \textsc{Università degli Studi di Roma ``Tor Vergata"} \\
+			& \textsc{LM-32 - 2nd level degree in Computer engineering}\\
+			& \\
+			& \CvEducation{Final degree mark}{\textbf{110/110 cum laude}} \\
+			& \CvEducation{Thesis title}{``A QoS-aware broker for multi-provider serverless applications"} \CvBullet \CvEducation{Thesis supervisor}{Valeria Cardellini} \\
+			& \CvEducation{Age at graduation}{28} \CvBullet \CvEducation{Graduation date}{23/05/2022}	
+		\end{tabular}
+		
+		\vspace{0.2cm}
+		
+		% -------------------------------------------------------------------------------- %
+		% Bachelor's degree
+		% -------------------------------------------------------------------------------- %
+		\begin{tabular}{p{\SidebarHSizeFirstPage}|p{\BodyHSizeFirstPage}}
+			\CvTimeRange{2012}{2018} & \textbf{Bachelor's degree}, Computer engineering \\
+			& \textsc{Università degli Studi di Roma ``Tor Vergata"} \\
+			& \textsc{L-8 - 1st level degree in Information technology}\\
+			& \\
+			& \CvEducation{Final degree mark}{\textbf{102/110}} \\	
+			& \CvEducation{Age at graduation}{25} \CvBullet \CvEducation{Graduation date}{26/10/2018}	
+		\end{tabular}
+		
+		\vspace{0.2cm}
+		
+		% -------------------------------------------------------------------------------- %
+		% Diploma
+		% -------------------------------------------------------------------------------- %
+		\begin{tabular}{p{\SidebarHSizeFirstPage}|p{\BodyHSizeFirstPage}}
+			\CvTimeRange{2008}{2012} & \textbf{Italian Secondary School Diploma}, Scientific Certificate \\
+			& \textsc{Liceo Scientifico Statale Bruno Touschek} \\	
+			& \\
+			& \CvEducation{School-leaving examination mark}{\textbf{90/100}} \\
+			& \CvEducation{Graduation date}{2012}	
+		\end{tabular}
+		      
+		      % ================================================================================ %
+		      % Work Experience
+		      % ================================================================================ %
+		      \CvSection{\faBriefcase}{Work Experience}
+		      
+		      \begin{tabular}{p{\SidebarHSizeFirstPage}|p{\BodyHSizeFirstPage}}
+		      	\CvTimeRange{June 2022}{Present} & \textbf{Software Engineer}, ALTEN Italia S.p.A. - Rome, Italy \\
+		      	& Acted as computer consultant for following companies: 
+		      	\begin{itemize}
+		      		\item \textbf{ABB S.p.A.} - Rome, Italy \newline
+		      		\textbf{(June 2022 - June 2023)} \newline
+		      		To develop web applications to perform several task like data management, report extraction, scheduling activities and production monitoring.\newline
+		      		\textcolor{CvColor}{\textbf{Activities:}}
+		      		\begin{itemize}
+		      			\item Acted as software designer, developer, tester and coordinator of the projects.
+		      			\item Performed requirements gathering and technical documentation.
+		      			\item Handled production deployment, testing and technical support.
+		      			\item Started initiatives aimed at improving software development process.
+		      			\item Performed bug fixing.
+		      		\end{itemize}
+		      		\textcolor{CvColor}{\textbf{Results:}}
+		      		\begin{itemize}
+		      			\item[\CvCheck] Acquired knowledge of several technologies and tools among which ``Entity Framework", Blazor, CSS, C\# and Azure DevOps.
+		      			\item[\CvCheck] Improved interpersonal skills.
+		      			\item[\CvCheck] Improved ability to work independently.
+		      			\item[\CvCheck] Deadlines met with customer satisfaction. 
+		      		\end{itemize}
+		      	\end{itemize} \\
+		      	
+		      \end{tabular}
+		      
+		      
+		      
+	\end{tcolorbox}
+\end{paracol}
+\newpage
+\newgeometry{left=15mm,right=15mm, top=10mm, bottom=20mm}
+
+\begin{tabular}{p{\SidebarHSize}|p{\BodyHSize}}
+
+& \begin{itemize}
+	\item \textbf{GF Machining Solutions S.p.A.} - Meyrin, Switzerland \newline
+	\textbf{(June 2023 - Present)} \newline
+	To develop a web application that allows users to setup and manage laser industrial machines.
 	
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{ORM} & Entity Framework \MediumLevel \CvBullet Hibernate \BasicLevel
-	\end{longtable}
+	\begin{itemize}
+		\item Acted as a developer.
+		\item Updated technical documentation.
+		\item Performed bug fixing.
+	\end{itemize}
 	
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{OS} & Microsoft Windows \MediumLevel \CvBullet Kubuntu \MediumLevel \CvBullet KDE Neon \MediumLevel \CvBullet Manjaro \MediumLevel \CvBullet Arch Linux \MediumLevel \\
-	\end{longtable}
+	\textcolor{CvColor}{\textbf{Results:}}
+	\begin{itemize}
+		\item[\CvCheck] Significanlty improved knowledge about C\#, \texttt{git}, Azure DevOps and Blazor. Acquired a basic knowledge about Scrum. 
+		\item[\CvCheck] Slightly improved my confidence in spoken English.
+		\item[\CvCheck] Slightly improved my ability to teamwork.
+	\end{itemize}
+\end{itemize}
+
+\end{tabular}
+
+		% ================================================================================ %
+		% Training
+		% ================================================================================ %
+		\CvSection{\faBook}{Training}
+		
+		\begin{tabular}{p{\SidebarHSize}|p{\BodyHSize}}
+			\CvDate{September 2022} & \textbf{RabbitMQ usage in event driven architecture} \\
+			& \textsc{Training course at ALTEN Italia S.p.A. (Rome, Italy)} \\
+		\end{tabular}
+		
+		% ================================================================================ %
+		% Language
+		% ================================================================================ %
+		\CvSection{\faLanguage}{Language}
+		
+		\begin{tabular}{p{\SidebarHSize}|p{\BodyHSize}}
+			\CvDate{Mother tongue} & Italian \\
+			& \\
+			
+			\CvDate{Foreign language(s)} & \begin{tabular}{c|c|c|c|c}
+				\textbf{Language} & \textbf{Listening} & \textbf{Reading} & \textbf{Writing} & \textbf{Speaking} \\
+				\hline 
+				&&&&\\		
+				English & \texttt{B1} & \texttt{B2} & \texttt{B2} & \texttt{B1} \\
+			\end{tabular}
+		\end{tabular} 
+		
+		% ================================================================================ %
+		% Computer Skill
+		% ================================================================================ %
+		\CvSection{\faLaptop}{Computer Skills}
+		
+		% -------------------------------------------------------------------------------- %
+		% Programming Languages / Markup Languages
+		% -------------------------------------------------------------------------------- %
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{Languages} &  \begin{tabular}{lcr}
+				\centering
+				& \textbf{Experience} & \textbf{Experience Years} \\
+				\hline
+				&& \\
+				\texttt{C} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 \\
+				\texttt{C++} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
+				\texttt{C\#} & $\FullBlock\FullBlock\FullBlock\FullBlock\EmptyBlock$ & 1.5 \\
+				\texttt{Java} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 \\
+				\texttt{Go} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 \\
+				\texttt{Python} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 \\
+				\texttt{Assembly MIPS} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
+				\texttt{Assembly x86} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
+				\texttt{HTML} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 \\
+				\texttt{CSS} & $\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
+				\LaTeX & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 5 \\\\
+			\end{tabular}
+		\end{tabular}
+		% -------------------------------------------------------------------------------- %
+		% Other
+		% -------------------------------------------------------------------------------- %
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{Cloud} & Apache OpenWhisk \BasicLevel \CvBullet AWS EC2 \BasicLevel \CvBullet AWS Lambda  \BasicLevel \CvBullet AWS Step Functions \BasicLevel \CvBullet AWS CloudWatch \BasicLevel \CvBullet SonarQube \BasicLevel \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{Build automation} & Maven \BasicLevel \CvBullet CMake \BasicLevel \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{Databases} & Microsoft SQL Server \MediumLevel \CvBullet PostgreSQL \MediumLevel \CvBullet InfluxDB \BasicLevel \CvBullet Apache Cassandra \BasicLevel \CvBullet Apache Kakfa \BasicLevel \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{ORM} & Entity Framework \MediumLevel \CvBullet Hibernate \BasicLevel \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{OS} & Microsoft Windows \MediumLevel \CvBullet Kubuntu \MediumLevel \CvBullet KDE Neon \MediumLevel \CvBullet Manjaro \MediumLevel \CvBullet Arch Linux \MediumLevel \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{Web Programming} & Blazor \MediumLevel \CvBullet JSP \BasicLevel \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{IDE} & Android Studio \BasicLevel \CvBullet CLion \MediumLevel \CvBullet IntelliJ IDEA Community Edition \MediumLevel \CvBullet GoLand \MediumLevel \CvBullet PyCharm Community Edition \MediumLevel \CvBullet Visual Studio \MediumLevel \CvBullet Google Colaboratory (Colab) \BasicLevel \CvBullet \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{DevOps} & Azure DevOps \BasicLevel \CvBullet JIRA Software \BasicLevel \CvBullet Travis CI \BasicLevel \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{Testing} & JUnit \BasicLevel \CvBullet MSTest \BasicLevel \CvBullet Moq \BasicLevel \CvBullet Mockito \BasicLevel \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{Others} & git \MediumLevel \CvBullet docker \BasicLevel \CvBullet Apache ZooKeeper \MediumLevel \CvBullet Valgrind \BasicLevel \CvBullet \texttt{lp\_solve} \BasicLevel \CvBullet  Gurobi \BasicLevel \CvBullet Some deep learning libraries (\texttt{TensorFlow} and \texttt{Keras}) \BasicLevel \CvBullet RabbitMQ \BasicLevel \\
+		\end{tabular}
+		
 	
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{Web Programming} & Blazor \MediumLevel \CvBullet JSP \BasicLevel \\
-	\end{longtable}
 	
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{IDE} & Android Studio \BasicLevel \CvBullet CLion \MediumLevel \CvBullet IntelliJ IDEA Community Edition \MediumLevel \CvBullet GoLand \MediumLevel \CvBullet PyCharm Community Edition \MediumLevel \CvBullet Visual Studio \MediumLevel \CvBullet Google Colaboratory (Colab) \BasicLevel \CvBullet \\
-	\end{longtable}
 	
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{DevOps} & Azure DevOps \BasicLevel \CvBullet JIRA Software \BasicLevel \CvBullet Travis CI \BasicLevel \\
-	\end{longtable}
+
 	
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{Testing} & JUnit \BasicLevel \CvBullet MSTest \BasicLevel \CvBullet Moq \BasicLevel \CvBullet Mockito \BasicLevel
-	\end{longtable}
 	
-	\begin{longtable}{p{\SidebarHSize}p{\BodyHSize}}
-		\CvDate{Others} & git \MediumLevel \CvBullet docker \BasicLevel \CvBullet Apache ZooKeeper \MediumLevel \CvBullet Valgrind \BasicLevel \CvBullet \texttt{lp\_solve} \BasicLevel \CvBullet  Gurobi \BasicLevel \CvBullet Some deep learning libraries (\texttt{TensorFlow} and \texttt{Keras}) \BasicLevel \CvBullet RabbitMQ \BasicLevel \\
-	\end{longtable}
+	
+	
 	
 \end{document}
 
