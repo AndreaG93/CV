@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{babel}
 \usepackage{fontawesome5}			% To add icons
-\usepackage{xcolor}					% To add colors
+\usepackage[table]{xcolor}			% To add colors
 \usepackage[scale=1]{geometry}      % To manage page margins
 \usepackage{graphicx} 				% To add graphics
 \usepackage[hidelinks]{hyperref}	% To add link
@@ -38,9 +38,25 @@
 % Commands...
 % -------------------------------------------------------------------------------- %
 
+\newcommand{\skill}[1][3]{%
+	\setlength{\unitlength}{1ex}%
+	\begin{picture}(1,1.8)
+		\linethickness{0.4ex}%
+		\textcolor{CvColor!15}{\multiput(0, 0.15)(0, 0.6){3}{\line(1,0){1}}}
+		\multiput(0, 0.15)(0, 0.6){#1}{\textcolor{CvColor}{\line(1,0){1}}}
+	\end{picture}%
+}
+
+
+
 % To add level to skill...
-\newcommand{\BasicLevel}{{\footnotesize (\textit{Foundation})}}
-\newcommand{\MediumLevel}{{\footnotesize (\textit{Intermediate})}}
+\newcommand{\BasicLevel}{{\skill[1]}}
+\newcommand{\MediumLevel}{{\skill[2]}}
+\newcommand{\MasterLevel}{{\skill[3]}}
+
+% To add level to skill with date...
+\newcommand{\BasicLevelDate}[1]{{\skill[1]} {\tiny (#1)}}
+\newcommand{\MediumLevelDate}[1]{{\skill[2]} {\tiny (#1)}}
 
 % To add education info in educational section...
 \newcommand{\CvEducation}[2]{ {\small \textit{#1}: #2}}
@@ -113,7 +129,7 @@
 			\\
 			\textcolor{CvSidebarTextColor}{\textbf{Place And Date of Birth}} \\
 			\textcolor{CvSidebarTextColor}{Frascati, Italy} \\
-			\textcolor{CvSidebarTextColor}{27 August 1993 \CvBulletForSidebar \textbf{Age}: 29} \\		
+			\textcolor{CvSidebarTextColor}{27 August 1993 \CvBulletForSidebar \textbf{Age}: 30} \\		
 			\\
 			\textcolor{CvSidebarTextColor}{\textbf{Address}} \\
 		    \textcolor{CvSidebarTextColor}{Viale S. Francesca Saverio Cabrini, 8} \\
@@ -273,7 +289,7 @@
 
 & \begin{itemize}
 	\item \textbf{GF Machining Solutions S.p.A.} - Meyrin, Switzerland \newline
-	\textbf{(June 2023 - Present)} \newline
+	\textbf{(June 2023 - September 2023)} \newline
 	To develop a web application that allows users to setup and manage laser industrial machines.
 	
 	\begin{itemize}
@@ -287,6 +303,21 @@
 		\item[\CvCheck] Significanlty improved knowledge about C\#, \texttt{git}, Azure DevOps and Blazor. Acquired a basic knowledge about Scrum. 
 		\item[\CvCheck] Slightly improved my confidence in spoken English.
 		\item[\CvCheck] Slightly improved my ability to teamwork.
+	\end{itemize}
+\end{itemize} \\
+
+& \begin{itemize}
+	\item \textbf{Telsy Elettronica e Telecomunicazioni S.p.A.} - Rome, Italy \newline
+	\textbf{(September 2023 - Present)} \newline
+	To develop a desktop application for Microsoft Windows that allows users to exchange data in a secure way.
+		
+	\begin{itemize}
+		\item Acted as a developer.
+	\end{itemize}
+	
+	\textcolor{CvColor}{\textbf{Results:}}
+	\begin{itemize}
+		\item[\CvCheck] Slighlty improved my knowledge about Windows Presentation Foundation (WPF). Acquired a basic knowledge about Jenkins pipelines.
 	\end{itemize}
 \end{itemize}
 
@@ -317,45 +348,54 @@
 				&&&&\\		
 				English & \texttt{B1} & \texttt{B2} & \texttt{B2} & \texttt{B1} \\
 			\end{tabular}
-		\end{tabular} 
+		\end{tabular}
+		
+		\newpage 
 		
 		% ================================================================================ %
 		% Computer Skill
 		% ================================================================================ %
 		\CvSection{\faLaptop}{Computer Skills}
 		
-		% -------------------------------------------------------------------------------- %
+		% -------------------------------------------------------------------------------- 
 		% Programming Languages / Markup Languages
-		% -------------------------------------------------------------------------------- %
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{Languages} &  \begin{tabular}{lcr}
+		% -------------------------------------------------------------------------------- 
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}		
+			\CvDate{Languages} &  \rowcolors{2}{CvColor!15}{white}\begin{tabular}{lcrr}
+			
 				\centering
-				& \textbf{Experience} & \textbf{Experience Years} \\
+				& \textbf{Experience} & \textbf{Experience Years} & \textbf{Last Used} \\
 				\hline
 				&& \\
-				\texttt{C} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 \\
-				\texttt{C++} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
-				\texttt{C\#} & $\FullBlock\FullBlock\FullBlock\FullBlock\EmptyBlock$ & 1.5 \\
-				\texttt{Java} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 \\
-				\texttt{Go} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 \\
-				\texttt{Python} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 \\
-				\texttt{Assembly MIPS} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
-				\texttt{Assembly x86} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
-				\texttt{HTML} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 \\
-				\texttt{CSS} & $\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 \\
-				\LaTeX & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 5 \\\\
+				\texttt{C} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 & 2020 \\
+				\texttt{C++} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2012 \\
+				\texttt{C\#} & $\FullBlock\FullBlock\FullBlock\FullBlock\EmptyBlock$ & 1.5 & 2023 \\
+				\texttt{Java} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 & 2020 \\
+				\texttt{Go} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2022 \\
+				\texttt{Python} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2021 \\
+				\texttt{Assembly MIPS} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2015 \\
+				\texttt{Assembly x86} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2020 \\
+				\texttt{HTML} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 & 2023 \\
+				\texttt{CSS} & $\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2023 \\
+				\LaTeX & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 4 & 2023 \\\\
 			\end{tabular}
 		\end{tabular}
+		
+		\textcolor{CvColor}{\rule[.3\baselineskip]{0.95\textwidth}{1pt}}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}} & {\footnotesize For each skill a level is reported according to following scheme} \\
+		& {\footnotesize \BasicLevel \hspace{2pt} (Basic) \hspace{4pt} \MediumLevel  \hspace{2pt} (Medium) \hspace{4pt} \MasterLevel \hspace{2pt} (Advanced)}\\ \\\\\end{tabular}
+		
 		% -------------------------------------------------------------------------------- %
 		% Other
 		% -------------------------------------------------------------------------------- %
-		
+	
 		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
 			\CvDate{Cloud} & Apache OpenWhisk \BasicLevel \CvBullet AWS EC2 \BasicLevel \CvBullet AWS Lambda  \BasicLevel \CvBullet AWS Step Functions \BasicLevel \CvBullet AWS CloudWatch \BasicLevel \CvBullet SonarQube \BasicLevel \\\\
 		\end{tabular}
 		
 		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{Build automation} & Maven \BasicLevel \CvBullet CMake \BasicLevel \\\\
+			\CvDate{DevOps and \newline Build automation} & Azure DevOps \BasicLevel \CvBullet JIRA Software \BasicLevel \CvBullet Travis CI \BasicLevel \CvBullet Maven \BasicLevel \CvBullet CMake \BasicLevel \CvBullet Jenkins \BasicLevel \\\\
 		\end{tabular}
 		
 		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
@@ -375,15 +415,19 @@
 		\end{tabular}
 		
 		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{IDE} & Android Studio \BasicLevel \CvBullet CLion \MediumLevel \CvBullet IntelliJ IDEA Community Edition \MediumLevel \CvBullet GoLand \MediumLevel \CvBullet PyCharm Community Edition \MediumLevel \CvBullet Visual Studio \MediumLevel \CvBullet Google Colaboratory (Colab) \BasicLevel \CvBullet \\\\
+			\CvDate{Desktop\newline Programming} & WPF \BasicLevel \CvBullet JavaFX \BasicLevel \\\\
 		\end{tabular}
 		
 		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{DevOps} & Azure DevOps \BasicLevel \CvBullet JIRA Software \BasicLevel \CvBullet Travis CI \BasicLevel \\\\
+			\CvDate{IDE} & Android Studio \BasicLevel \CvBullet CLion \MediumLevel \CvBullet IntelliJ IDEA Community Edition \MediumLevel \CvBullet GoLand \MediumLevel \CvBullet PyCharm Community Edition \MediumLevel \CvBullet Visual Studio \MediumLevel \CvBullet Google Colaboratory (Colab) \BasicLevel \\\\
 		\end{tabular}
 		
 		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
 			\CvDate{Testing} & JUnit \BasicLevel \CvBullet MSTest \BasicLevel \CvBullet Moq \BasicLevel \CvBullet Mockito \BasicLevel \\\\
+		\end{tabular}
+		
+		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
+			\CvDate{Virtualization} & Hiper-V \BasicLevel \CvBullet VirtualBox \BasicLevel \\\\
 		\end{tabular}
 		
 		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
