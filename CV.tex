@@ -1,6 +1,8 @@
 \documentclass[english,10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
 \usepackage[T1]{fontenc}
-\usepackage{babel}
 \usepackage{fontawesome5}			% To add icons
 \usepackage[table]{xcolor}			% To add colors
 \usepackage[scale=1]{geometry}      % To manage page margins
@@ -12,15 +14,28 @@
 \usepackage{calc}
 \usepackage[most]{tcolorbox}
 \usepackage{paracol}
+\usepackage{setspace}
+\usepackage{wrapfig}
+\usepackage{worldflags}
+\usepackage{adjustbox}
+\usepackage{multirow}
+\usepackage{gradient-text}
+\usepackage{changepage}
+\usepackage{booktabs}
+\usepackage{subcaption}
+
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
 
 \renewcommand{\familydefault}{\sfdefault}
 
 % -------------------------------------------------------------------------------- %
 % CV Colors...
 % -------------------------------------------------------------------------------- %
-\definecolor{CvColor}{RGB}{211,48,93}
-\definecolor{CvSidebarBackColor}{RGB}{211,48,93}
-\definecolor{CvSidebarTextColor}{RGB}{255,255,255}
+\definecolor{CvIcon}{RGB}{101, 105, 109}
+\definecolor{CvColor}{RGB}{50,107,187}
+\definecolor{CvSidebarBackColor}{RGB}{239,239,239}
+\definecolor{CvSidebarTextColor}{RGB}{0,0,0}
 
 % -------------------------------------------------------------------------------- %
 % Footer and Header...
@@ -47,33 +62,50 @@
 	\end{picture}%
 }
 
+\newcommand{\Map}{\textcolor{CvColor}{\faMapMarker*}}
+\newcommand{\Calendar}{\textcolor{CvColor!50}{\faCalendar*}}
 
+\newcommand{\JobTitle}[1]{\textcolor{CvColor}{\textbf{{\footnotesize #1}}}}
+\newcommand{\SubTitle}[1]{\textcolor{CvColor}{\textbf{{\tiny #1}}}}
+
+
+\newcommand{\SubCompanyName}[1]{\textcolor{CvIcon}{{\footnotesize \textsf{#1}}}}
+\newcommand{\Location}[1]{{\footnotesize \Map \hspace{3px} #1}}
+\newcommand{\Date}[1]{{\footnotesize \Calendar \hspace{3px} #1}}
+
+\newcommand{\JobExperience}[3]{\textsc{{\small #1}} \hfill \Date{#2} \hspace{15px} \Location{#3}}
+
+
+
+\newcommand{\CompanyName}[1]{\textsc{{\small #1}}}
+\newcommand{\JobTimeRange}[1]{{\footnotesize \textcolor{CvColor!50}{\faCalendar*} \hspace{0.01cm} #1}}
+\newcommand{\JobLocation}[1]{{\footnotesize \textcolor{CvColor!50}{\faMapMarker*} \hspace{0.01cm} #1}}
 
 % To add level to skill...
-\newcommand{\BasicLevel}{{\skill[1]}}
-\newcommand{\MediumLevel}{{\skill[2]}}
-\newcommand{\MasterLevel}{{\skill[3]}}
+\newcommand{\BasicLevel}{{\skill[1]} \hspace{2pt}}
+\newcommand{\MediumLevel}{{\skill[2]} \hspace{2pt}}
+\newcommand{\MasterLevel}{{\skill[3]} \hspace{2pt}}
 
 % To add level to skill with date...
 \newcommand{\BasicLevelDate}[1]{{\skill[1]} {\tiny (#1)}}
 \newcommand{\MediumLevelDate}[1]{{\skill[2]} {\tiny (#1)}}
 
-% To add education info in educational section...
-\newcommand{\CvEducation}[2]{ {\small \textit{#1}: #2}}
 
 % To add a bullet...
 \newcommand{\CvBullet}{\hspace{0.05cm} \textcolor{CvColor}{$\bullet$} \hspace{0.05cm}}
-\newcommand{\CvBulletForSidebar}{\hspace{0.05cm}\textcolor{CvSidebarTextColor}{$\bullet$}\hspace{0.05cm}
+\newcommand{\CvBulletForSidebar}{\hspace{0.05cm}\textcolor{CvColor}{$\bullet$}\hspace{0.05cm}
 	}
 
 % Check symbol...
 \newcommand{\CvCheck}{\textcolor{CvColor}{\faCheck}}
 
-\newcommand{\CvSection}[2]{\vspace{0.5cm}
-	\begin{tcolorbox}[colback=CvSidebarBackColor,boxrule=0pt, top=2.5pt,bottom=2.5pt, arc=0pt,outer arc=0pt]
-	{\Large \textcolor{CvSidebarTextColor}{#1 \hspace{2pt} \textbf{#2}}}
-	\end{tcolorbox}
-	}
+\newcommand{\CvSection}[2]{
+	\hspace{0.25cm}\textcolor{CvColor!50}{#1} \hspace{0.01cm} \textcolor{CvColor!80}{#2}\\
+	\textcolor{CvColor}{\rule[.7\baselineskip]{\textwidth}{1pt}}}
+	
+\newcommand{\CvSidebarSection}[2]{
+	\textcolor{CvColor!50}{{\footnotesize #1}} \hspace{0.01cm} \textcolor{CvColor!80}{{\footnotesize #2}} \\
+	\textcolor{CvColor}{\rule[.7\baselineskip]{0.8\textwidth}{1pt}}}
 
 % To design 'Time Range'...
 \newcommand{\CvTimeRange}[2]{\textcolor{CvColor}{\textsc{#1 - #2}}}
@@ -87,354 +119,411 @@
 
 % To customize "itemize" enviroment
 \renewcommand{\labelitemi}{$\textcolor{CvColor}{\circ}$}
-\renewcommand{\labelitemii}{\textcolor{CvColor}{$\bullet$}}
+\renewcommand{\labelitemii}{\textcolor{CvColor}{$>$}}
+\renewcommand{\labelitemiii}{\textcolor{CvColor}{-}}
+
+
+
+\newcommand{\TableHeader}[1]{\textcolor{CvColor}{\footnotesize \textsc{#1}}}
+
+\def\ComputerSkillGroupColumn{2.5cm}
+\def\ComputerSkillColumn{{9.5cm}}
+
 
 % -------------------------------------------------------------------------------- %
 % Variables.
 % -------------------------------------------------------------------------------- %
 
-\def\SidebarHSizeFirstPage{2.5cm}
-\def\SidebarHSize{3.95cm}
-\def\BodyHSizeFirstPage{9cm}
-\def\BodyHSize{12.5cm}
+
+
+\def\JobDescriptionLineSpace{0.7}
+
+\tikzset{
+	path image/.style={
+		path picture={
+			\node at (path picture bounding box.center) {
+				\includegraphics[height=3.5cm]{./Images/dd.jpg}};}}
+}
+
+
+\newcommand{\Sep}{\textcolor{CvColor}{|}\hspace{0.1cm}}
+
+\definecolor{white}{RGB}{255,255,255}
+\definecolor{gray}{HTML}{4D4D4D}
+\definecolor{maingray}{HTML}{B9B9B9}
+
+\newcommand\skills[1]{ 
+	\begin{tikzpicture}
+		\foreach [count=\i] \x/\y in {#1}{
+			\draw[fill=CvColor,maingray] (0,\i) rectangle (6*0.7,\i+0.20);
+			\draw[shading = axis, right color=CvColor!10!CvColor, left color=white!40!CvColor,shading angle=180](0,\i) rectangle (\y*0.7,\i+0.20);
+			\node[above right] at (0,\i+0.25) {{\scriptsize \x}};
+		}
+	\end{tikzpicture}
+}
+
+\newcommand{\SkillAsBlock}[1]{
+	$\foreach \n in {1,...,#1}{\FullBlock} \foreach \n in {#1,...,4}{\EmptyBlock}$	
+}
+
+
+\newcommand{\roundpic}[4][]{	
+	\tikz\node [circle, minimum width = #2,
+	path picture = {
+		\node [#1] at (path picture bounding box.center) {
+			\includegraphics[width=#3, angle=90]{#4}};
+	}] {};}
+
 
 \begin{document}
 
-\columnratio{.31}
+\columnratio{.32}
 \begin{paracol}{2}
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%      Contents sidebar      %%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	\begin{tcolorbox}[colback=CvSidebarBackColor,height=\textheight,boxrule=0pt, left=0pt,right=0pt,top=0pt,bottom=0pt, arc=0pt,outer arc=0pt]
-		\centering
-		\begin{tikzpicture}
-			\clip (0,0) circle (2cm) node {\includegraphics[width=4cm]{./Images/Photo.png}};
-			\draw[CvSidebarTextColor, line width=4pt] circle (2cm);
-		\end{tikzpicture}
-		
-		\begin{quotation}
-			\textcolor{CvSidebarTextColor}
-			{\textsl{Seeking a position that allows me allow me to develop and design  software with ever greater autonomy.\\	
-			I would like to work with embedded and real-time systems or develop applications using Linux.\\
+	
+% ======================================================================= %
+% Page #1
+% ======================================================================= %
+\begin{tcolorbox}[colback=CvSidebarBackColor,height=\textheight,boxrule=0pt, left=0pt,right=0pt,top=0pt,bottom=0pt, arc=0pt,outer arc=0pt, colframe=CvSidebarBackColor]
+
+\vspace{0.5cm}	
+	
+% ======================================================================= %
+% Page #1 - Sidebar
+% ======================================================================= %
+\begin{center}	
+
+\roundpic{6cm}{8cm}{./Images/dd.jpg}
+
+\vspace{0.5cm}
+
+{\LARGE \textcolor{CvColor!70}{\textsf{Andrea}} \textcolor{CvColor}{\textsc{Graziani}}}\\
+
+ {\small \textcolor{CvColor!60}{Software engineer}}
+
+\vspace{0.5cm}
+\begin{quotation}
+{\scriptsize 	Seeking a position that allows me allow me to develop and design  software with ever greater autonomy.
 			I want to learn and apply DevOps development principles, in
 			order to ensure higher quality and maintainability of the
-			released software.
-			}}
+			released software.	}
+\end{quotation}
+\vspace{0.5cm}
+
+\CvSidebarSection{\faInfoCircle}{Info}
+
+{\scriptsize 	
+	\begin{tabular}{cl}
+			\textcolor{CvColor}{\faUser[light]} & 27 August 1993 \\
+			& \CvBulletForSidebar \textit{{\scriptsize 30 years old}} \\[5pt]
+		
+			\textcolor{CvColor}{\faMapMarker*[light]} & \href{https://www.google.com/maps/place/41.8093516,12.7373629}{Viale S. Francesca Saverio Cabrini, 8} \\
+			& \href{https://www.google.com/maps/place/41.8093516,12.7373629}{00077 Monte Compatri (RM), Italy} \\[5pt]
+		
+			\textcolor{CvColor}{\faPhone*[light]} & \textcolor{CvSidebarTextColor}{\href{tel:393337858512}{+(39)~333~78~58~512}} \\[5pt]
 			
-		\end{quotation}
-
-		\textcolor{CvSidebarTextColor}{\rule[.5\baselineskip]{0.9\textwidth}{1.5pt}}
-
-		\begin{tabular}{c}
-			\\
-			\textcolor{CvSidebarTextColor}{\textbf{Place And Date of Birth}} \\
-			\textcolor{CvSidebarTextColor}{Frascati, Italy} \\
-			\textcolor{CvSidebarTextColor}{27 August 1993 \CvBulletForSidebar \textbf{Age}: 30} \\		
-			\\
-			\textcolor{CvSidebarTextColor}{\textbf{Address}} \\
-		    \textcolor{CvSidebarTextColor}{Viale S. Francesca Saverio Cabrini, 8} \\
-	        \textcolor{CvSidebarTextColor}{00077 Monte Compatri (RM), Italy} \\
-			\\
-			\textcolor{CvSidebarTextColor}{\textbf{Nationality}} \\		
-			\textcolor{CvSidebarTextColor}{Italy} \\\\		
-			\textcolor{CvSidebarTextColor}{\textbf{Driving Licence}} \\		
-			\textcolor{CvSidebarTextColor}{B \CvBulletForSidebar Car Available} \\\\	
-		\end{tabular}
-	
-		\textcolor{CvSidebarTextColor}{\rule[.5\baselineskip]{0.9\textwidth}{1.5pt}}
-		
-		\begin{tabular}{c}
-			\\
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			% Email
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			{\large \textcolor{CvSidebarTextColor}{\faEnvelope}} \\ \href{mailto:andrea.graziani.ing@outlook.com}{\textcolor{CvSidebarTextColor}{\texttt{andrea.graziani.ing@outlook.com}}} \\\\
+			\textcolor{CvColor}{\faEnvelope[light]} &  \href{mailto:andrea.graziani.ing@outlook.com}{\textcolor{CvSidebarTextColor}{\texttt{andrea.graziani.ing@outlook.com}}} \\[5pt]
 			
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			% Phone
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			{\large \textcolor{CvSidebarTextColor}{\faPhone}} \\ 
-			\textcolor{CvSidebarTextColor}{+(39)~333~78~58~512} \\\\
+			\textcolor{CvColor}{\faGithub} & \href{https://github.com/AndreaG93}{\textcolor{CvSidebarTextColor}{\texttt{AndreaG93}}}\\[5pt]
 			
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			% GitHub
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			{\large \textcolor{CvSidebarTextColor}{\textsc{\faGithub}}} \\ \href{https://github.com/AndreaG93}{\textcolor{CvSidebarTextColor}{\texttt{AndreaG93}}} \\\\
+			\textcolor{CvColor}{\faLinkedin} & \href{https://it.linkedin.com/in/andrea-graziani-5134b8256}{\textcolor{CvSidebarTextColor}{\texttt{andrea-graziani-5134b8256}}} \\[5pt]
 			
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			% Linkedin
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			{\large \textcolor{CvSidebarTextColor}{\textsc{\faLinkedin}}} \\ \href{https://it.linkedin.com/in/andrea-graziani-5134b8256}{\textcolor{CvSidebarTextColor}{\texttt{andrea-graziani-5134b8256}}} \\\\
+			\textcolor{CvColor}{\faCar[light]} & Driving Licence B \\
+			& \CvBulletForSidebar \textit{{\scriptsize Car Available}} \\[5pt]
 			
-		\end{tabular}
-		
-		\textcolor{CvSidebarTextColor}{\rule[.5\baselineskip]{0.9\textwidth}{1.5pt}}
-		
-		\begin{tabular}{c}
-			\\
-		
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			% Available for business travels
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			{\large \textcolor{CvSidebarTextColor}{\faPlaneDeparture}} \\ 
-			\textcolor{CvSidebarTextColor}{Available for business travels} \\\\
-			
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			% Available for business travels
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			{\large \textcolor{CvSidebarTextColor}{\faGlobeEurope}} \\ 
-			\textcolor{CvSidebarTextColor}{Available to relocate abroad} \\
-			\textcolor{CvSidebarTextColor}{\textbf{Europe only}}
+			\textcolor{CvColor}{\faFlag[light]} & Italian \\\\
+	\end{tabular}
+}
 
-		\end{tabular}
-		
-	\end{tcolorbox}
-	\switchcolumn  %<--------
-	\begin{tcolorbox}[colback=white, height=\textheight,colframe=white, top=0pt,bottom=0pt]
-		
-		\vspace{1.5cm}
-		
-		{\Huge \textcolor{CvColor!50}{\textbf{Andrea}} \textcolor{CvColor!80}{\scshape \textbf{Graziani}}} \hfill \\
-		\textcolor{CvColor}{\rule[.5\baselineskip]{\textwidth}{2pt}}
-		
-		
-		\hfill {\Large \textcolor{CvColor!60}{\textit{SOFTWARE ENGINEER}}}
-		
-		\vspace{0.5cm}
-		      
-		% ================================================================================ %
-		% Education
-		% ================================================================================ %
-		\CvSection{\faGraduationCap}{Education}
-		
-		% -------------------------------------------------------------------------------- %
-		% Master’s Degree
-		% -------------------------------------------------------------------------------- %
-		\begin{tabular}{p{\SidebarHSizeFirstPage}|p{\BodyHSizeFirstPage}}
-			\CvTimeRange{2018}{2022} & \textbf{Master’s Degree}, Computer engineering \\
-			& \textsc{Università degli Studi di Roma ``Tor Vergata"} \\
-			& \textsc{LM-32 - 2nd level degree in Computer engineering}\\
-			& \\
-			& \CvEducation{Final degree mark}{\textbf{110/110 cum laude}} \\
-			& \CvEducation{Thesis title}{``A QoS-aware broker for multi-provider serverless applications"} \CvBullet \CvEducation{Thesis supervisor}{Valeria Cardellini} \\
-			& \CvEducation{Age at graduation}{28} \CvBullet \CvEducation{Graduation date}{23/05/2022}	
-		\end{tabular}
-		
-		\vspace{0.2cm}
-		
-		% -------------------------------------------------------------------------------- %
-		% Bachelor's degree
-		% -------------------------------------------------------------------------------- %
-		\begin{tabular}{p{\SidebarHSizeFirstPage}|p{\BodyHSizeFirstPage}}
-			\CvTimeRange{2012}{2018} & \textbf{Bachelor's degree}, Computer engineering \\
-			& \textsc{Università degli Studi di Roma ``Tor Vergata"} \\
-			& \textsc{L-8 - 1st level degree in Information technology}\\
-			& \\
-			& \CvEducation{Final degree mark}{\textbf{102/110}} \\	
-			& \CvEducation{Age at graduation}{25} \CvBullet \CvEducation{Graduation date}{26/10/2018}	
-		\end{tabular}
-		
-		\vspace{0.2cm}
-		
-		% -------------------------------------------------------------------------------- %
-		% Diploma
-		% -------------------------------------------------------------------------------- %
-		\begin{tabular}{p{\SidebarHSizeFirstPage}|p{\BodyHSizeFirstPage}}
-			\CvTimeRange{2008}{2012} & \textbf{Italian Secondary School Diploma}, Scientific Certificate \\
-			& \textsc{Liceo Scientifico Statale Bruno Touschek} \\	
-			& \\
-			& \CvEducation{School-leaving examination mark}{\textbf{90/100}} \\
-			& \CvEducation{Graduation date}{2012}	
-		\end{tabular}
-		      
-		      % ================================================================================ %
-		      % Work Experience
-		      % ================================================================================ %
-		      \CvSection{\faBriefcase}{Work Experience}
-		      
-		      \begin{tabular}{p{\SidebarHSizeFirstPage}|p{\BodyHSizeFirstPage}}
-		      	\CvTimeRange{June 2022}{Present} & \textbf{Software Engineer}, ALTEN Italia S.p.A. - Rome, Italy \\
-		      	& Acted as computer consultant for following companies: 
-		      	\begin{itemize}
-		      		\item \textbf{ABB S.p.A.} - Rome, Italy \newline
-		      		\textbf{(June 2022 - June 2023)} \newline
-		      		To develop web applications to perform several task like data management, report extraction, scheduling activities and production monitoring.\newline
-		      		\textcolor{CvColor}{\textbf{Activities:}}
-		      		\begin{itemize}
-		      			\item Acted as software designer, developer, tester and coordinator of the projects.
-		      			\item Performed requirements gathering and technical documentation.
-		      			\item Handled production deployment, testing and technical support.
-		      			\item Started initiatives aimed at improving software development process.
-		      			\item Performed bug fixing.
-		      		\end{itemize}
-		      		\textcolor{CvColor}{\textbf{Results:}}
-		      		\begin{itemize}
-		      			\item[\CvCheck] Acquired knowledge of several technologies and tools among which ``Entity Framework", Blazor, CSS, C\# and Azure DevOps.
-		      			\item[\CvCheck] Improved interpersonal skills.
-		      			\item[\CvCheck] Improved ability to work independently.
-		      			\item[\CvCheck] Deadlines met with customer satisfaction. 
-		      		\end{itemize}
-		      	\end{itemize} \\
-		      	
-		      \end{tabular}
-		      
-		      
-		      
-	\end{tcolorbox}
-\end{paracol}
-\newpage
-\newgeometry{left=15mm,right=15mm, top=10mm, bottom=20mm}
+\CvSidebarSection{\faLanguage}{Languages}
 
-\begin{tabular}{p{\SidebarHSize}|p{\BodyHSize}}
-
-& \begin{itemize}
-	\item \textbf{GF Machining Solutions S.p.A.} - Meyrin, Switzerland \newline
-	\textbf{(June 2023 - September 2023)} \newline
-	To develop a web application that allows users to setup and manage laser industrial machines.
-	
-	\begin{itemize}
-		\item Acted as a developer.
-		\item Updated technical documentation.
-		\item Performed bug fixing.
-	\end{itemize}
-	
-	\textcolor{CvColor}{\textbf{Results:}}
-	\begin{itemize}
-		\item[\CvCheck] Significanlty improved knowledge about C\#, \texttt{git}, Azure DevOps and Blazor. Acquired a basic knowledge about Scrum. 
-		\item[\CvCheck] Slightly improved my confidence in spoken English.
-		\item[\CvCheck] Slightly improved my ability to teamwork.
-	\end{itemize}
-\end{itemize} \\
-
-& \begin{itemize}
-	\item \textbf{Telsy Elettronica e Telecomunicazioni S.p.A.} - Rome, Italy \newline
-	\textbf{(September 2023 - Present)} \newline
-	To develop a desktop application for Microsoft Windows that allows users to exchange data in a secure way.
-		
-	\begin{itemize}
-		\item Acted as a developer.
-	\end{itemize}
-	
-	\textcolor{CvColor}{\textbf{Results:}}
-	\begin{itemize}
-		\item[\CvCheck] Slighlty improved my knowledge about Windows Presentation Foundation (WPF). Acquired a basic knowledge about Jenkins pipelines.
-	\end{itemize}
-\end{itemize}
-
+\begin{tabular}{rcccc}
+	 & \multirow{2}{*}{\textcolor{CvColor!50}{\faHeadphones}} & \multirow{2}{*}{\textcolor{CvColor!50}{\faBook}} & \multirow{2}{*}{ \textcolor{CvColor!50}{\faFeather}} & \multirow{2}{*}{\textcolor{CvColor!50}{\faComments}} \\
+     & \multirow{2}{*}{\tiny \textbf{Listening}} & \multirow{2}{*}{\tiny \textbf{Reading}} & \multirow{2}{*}{\tiny \textbf{Writing}} & \multirow{2}{*}{\tiny \textbf{Speaking}} \\\\	
+	\worldflag[length=0.6cm, width=0.4cm]{GB} & \texttt{B1} & \texttt{B2} & \texttt{B2} & \texttt{B1} \\
+	\worldflag[length=0.6cm, width=0.4cm]{IT} & \multicolumn{4}{c}{{\scriptsize \textit{Mother tongue}}}\\\\
 \end{tabular}
 
-		% ================================================================================ %
-		% Training
-		% ================================================================================ %
-		\CvSection{\faBook}{Training}
-		
-		\begin{tabular}{p{\SidebarHSize}|p{\BodyHSize}}
-			\CvDate{September 2022} & \textbf{RabbitMQ usage in event driven architecture} \\
-			& \textsc{Training course at ALTEN Italia S.p.A. (Rome, Italy)} \\
-		\end{tabular}
-		
-		% ================================================================================ %
-		% Language
-		% ================================================================================ %
-		\CvSection{\faLanguage}{Language}
-		
-		\begin{tabular}{p{\SidebarHSize}|p{\BodyHSize}}
-			\CvDate{Mother tongue} & Italian \\
-			& \\
-			
-			\CvDate{Foreign language(s)} & \begin{tabular}{c|c|c|c|c}
-				\textbf{Language} & \textbf{Listening} & \textbf{Reading} & \textbf{Writing} & \textbf{Speaking} \\
-				\hline 
-				&&&&\\		
-				English & \texttt{B1} & \texttt{B2} & \texttt{B2} & \texttt{B1} \\
-			\end{tabular}
-		\end{tabular}
-		
-		\newpage 
-		
-		% ================================================================================ %
-		% Computer Skill
-		% ================================================================================ %
-		\CvSection{\faLaptop}{Computer Skills}
-		
-		% -------------------------------------------------------------------------------- 
-		% Programming Languages / Markup Languages
-		% -------------------------------------------------------------------------------- 
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}		
-			\CvDate{Languages} &  \rowcolors{2}{CvColor!15}{white}\begin{tabular}{lcrr}
-			
-				\centering
-				& \textbf{Experience} & \textbf{Experience Years} & \textbf{Last Used} \\
-				\hline
-				&& \\
-				\texttt{C} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 & 2020 \\
-				\texttt{C++} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2012 \\
-				\texttt{C\#} & $\FullBlock\FullBlock\FullBlock\FullBlock\EmptyBlock$ & 1.5 & 2023 \\
-				\texttt{Java} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 & 2020 \\
-				\texttt{Go} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2022 \\
-				\texttt{Python} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2021 \\
-				\texttt{Assembly MIPS} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2015 \\
-				\texttt{Assembly x86} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2020 \\
-				\texttt{HTML} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 2 & 2023 \\
-				\texttt{CSS} & $\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2023 \\
-				\LaTeX & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 4 & 2023 \\\\
-			\end{tabular}
-		\end{tabular}
-		
-		\textcolor{CvColor}{\rule[.3\baselineskip]{0.95\textwidth}{1pt}}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}} & {\footnotesize For each skill a level is reported according to following scheme} \\
-		& {\footnotesize \BasicLevel \hspace{2pt} (Basic) \hspace{4pt} \MediumLevel  \hspace{2pt} (Medium) \hspace{4pt} \MasterLevel \hspace{2pt} (Advanced)}\\ \\\\\end{tabular}
-		
-		% -------------------------------------------------------------------------------- %
-		% Other
-		% -------------------------------------------------------------------------------- %
-	
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{Cloud} & Apache OpenWhisk \BasicLevel \CvBullet AWS EC2 \BasicLevel \CvBullet AWS Lambda  \BasicLevel \CvBullet AWS Step Functions \BasicLevel \CvBullet AWS CloudWatch \BasicLevel \CvBullet SonarQube \BasicLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{DevOps and \newline Build automation} & Azure DevOps \BasicLevel \CvBullet JIRA Software \BasicLevel \CvBullet Travis CI \BasicLevel \CvBullet Maven \BasicLevel \CvBullet CMake \BasicLevel \CvBullet Jenkins \BasicLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{Databases} & Microsoft SQL Server \MediumLevel \CvBullet PostgreSQL \MediumLevel \CvBullet InfluxDB \BasicLevel \CvBullet Apache Cassandra \BasicLevel \CvBullet Apache Kakfa \BasicLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{ORM} & Entity Framework \MediumLevel \CvBullet Hibernate \BasicLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{OS} & Microsoft Windows \MediumLevel \CvBullet Kubuntu \MediumLevel \CvBullet KDE Neon \MediumLevel \CvBullet Manjaro \MediumLevel \CvBullet Arch Linux \MediumLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{Web Programming} & Blazor \MediumLevel \CvBullet JSP \BasicLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{Desktop\newline Programming} & WPF \BasicLevel \CvBullet JavaFX \BasicLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{IDE} & Android Studio \BasicLevel \CvBullet CLion \MediumLevel \CvBullet IntelliJ IDEA Community Edition \MediumLevel \CvBullet GoLand \MediumLevel \CvBullet PyCharm Community Edition \MediumLevel \CvBullet Visual Studio \MediumLevel \CvBullet Google Colaboratory (Colab) \BasicLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{Testing} & JUnit \BasicLevel \CvBullet MSTest \BasicLevel \CvBullet Moq \BasicLevel \CvBullet Mockito \BasicLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{Virtualization} & Hiper-V \BasicLevel \CvBullet VirtualBox \BasicLevel \\\\
-		\end{tabular}
-		
-		\begin{tabular}{p{\SidebarHSize}p{\BodyHSize}}
-			\CvDate{Others} & git \MediumLevel \CvBullet docker \BasicLevel \CvBullet Apache ZooKeeper \MediumLevel \CvBullet Valgrind \BasicLevel \CvBullet \texttt{lp\_solve} \BasicLevel \CvBullet  Gurobi \BasicLevel \CvBullet Some deep learning libraries (\texttt{TensorFlow} and \texttt{Keras}) \BasicLevel \CvBullet RabbitMQ \BasicLevel \\
-		\end{tabular}
+
+\end{center}
 		
 	
+		
+	
+	
+		
+\end{tcolorbox}
+\switchcolumn
+\begin{tcolorbox}[colback=white, height=\textheight, colframe=white, left=0cm]
+
+		% ======================================================================= %
+		% Page #1 - Content
+		% ======================================================================= %
+		
+		\vspace{0.3cm}	
+		\CvSection{\faBriefcase}{Work History}
+	
+	\begin{itemize}		
+		\item \CompanyName{ALTEN Italia S.p.A.} \textcolor{CvColor}{|} {\scriptsize Rome, Italy} \hfill \JobTimeRange{June 2022 - Ongoing} \\
+		{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Software Engineer}} 
+		\vspace{0.25cm}
+		
+			{
+				\footnotesize I worked as \textit{consultant} developing several kind of software for following companies:
+				\begin{itemize}
+					
+					% ====================================================================== %
+					\item \SubCompanyName{Telsy Elettronica e Telecomunicazioni S.p.A.} \textcolor{CvColor}{|} {\scriptsize Rome, Italy} \hfill \JobTimeRange{September 2023 - Ongoing}\\			
+					% ====================================================================== %
+					
+					To develop a desktop application for Microsoft Windows that allows users to exchange data in a secure way.
+					
+					\begin{itemize}
+						\item Acted as a developer and tester.
+						\item Updated technical and business documentation.
+						\item Performed bug fixing.
+					\end{itemize}
+					
+					\textcolor{CvColor}{Results:}
+					\begin{itemize}
+						\item[\CvCheck] Acquired knowledge about Windows Presentation Foundation (WPF).
+						\item[\CvCheck] Improved knowledge about \texttt{git}, Jenkins pipelines, GitLab and SonarQube.
+					\end{itemize}
+					
+					% ====================================================================== %
+					\vspace*{0.2cm}
+					\item \SubCompanyName{GF Machining Solutions S.p.A.} \textcolor{CvColor}{|} {\scriptsize Meyrin, Switzerland} \hfill \JobTimeRange{June 2023 - September 2023}\\			
+					% ====================================================================== %
+					
+					To develop a web application that allows users to setup and manage laser industrial machines.
+					
+					\begin{itemize}
+						\item Acted as a developer.
+						\item Updated technical documentation.
+						\item Performed bug fixing.
+					\end{itemize}
+					
+					\textcolor{CvColor}{Results:}
+					\begin{itemize}
+						\item[\CvCheck] Significanlty improved knowledge about C\#, \texttt{git}, Azure DevOps and Blazor.
+						\item[\CvCheck] Slightly improved my confidence in spoken English.
+						\item[\CvCheck] Slightly improved my ability to teamwork.
+					\end{itemize}
+					
+					% ====================================================================== %
+					\vspace*{0.2cm}
+					\item \SubCompanyName{ABB S.p.A.} \textcolor{CvColor}{|} {\scriptsize Rome, Italy} \hfill
+					\JobTimeRange{June 2022 - June 2023}\\			
+					% ====================================================================== %
+					
+					To develop web applications to perform several task like data management, report extraction, scheduling activities and production monitoring.
+					\begin{itemize}
+						\item Acted as software designer, developer, tester and coordinator of the projects.
+						\item Performed requirements gathering and technical documentation.
+						\item Handled production deployment, testing and technical support.
+						\item Started initiatives aimed at improving software development process.
+						\item Performed bug fixing.
+					\end{itemize}
+					\textcolor{CvColor}{Results:}
+					\begin{itemize}
+						\item[\CvCheck] Acquired knowledge of several technologies and tools among which ``Entity Framework", Blazor, CSS, C\# and Azure DevOps.
+						\item[\CvCheck] Improved interpersonal skills.
+						\item[\CvCheck] Improved ability to work independently.
+						\item[\CvCheck] Deadlines met with customer satisfaction. 
+					\end{itemize}						
+				\end{itemize}
+			}
+		
+		
+		
+		
+	\end{itemize}
+	
+\CvSection{\faGraduationCap}{Education}
+\begin{itemize}
+	\item \CompanyName{Master’s Degree} \textcolor{CvColor}{|} {\scriptsize Computer engineering} \hfill \JobTimeRange{2018 - 2022}\\
+	{\scriptsize \textcolor{CvIcon}{\textsc{Università degli Studi di Roma ``Tor Vergata''}}} \\
+	{\scriptsize \textcolor{CvIcon}{\textsc{LM-32 - 2nd level degree in Computer engineering}}}
+	{\scriptsize \begin{itemize}
+		\item[-] Final degree mark: \textcolor{CvColor}{110/110 cum laude}
+		\item[-] Thesis title: ``\textit{A QoS-aware broker for multi-provider serverless applications}"
+		\item[-] Thesis supervisor: \textit{Valeria Cardellini}
+		\item[-] Age at graduation: \textit{28} \CvBullet Graduation date: \textit{23/05/2022}	
+	\end{itemize}}
+	
+	\vspace*{0.2cm}
+	
+	\item \CompanyName{Bachelor's degree} \textcolor{CvColor}{|} {\scriptsize Computer engineering} \hfill \JobTimeRange{2012 - 2018}\\
+	{\scriptsize \textcolor{CvIcon}{\textsc{Università degli Studi di Roma ``Tor Vergata''}}} \\
+	{\scriptsize \textcolor{CvIcon}{\textsc{L-8 - 1st level degree in Information technology}}}
+	{\scriptsize \begin{itemize}
+			\item[-] Final degree mark: \textcolor{CvColor}{102/110}
+			\item[-] Age at graduation: \textit{25} \CvBullet Graduation date: \textit{26/10/2018}	
+	\end{itemize}}
+
+	\vspace*{0.2cm}
+
+	\item \CompanyName{Italian Secondary School Diploma} \textcolor{CvColor}{|} {\scriptsize Scientific Certificate} \hfill \JobTimeRange{2012}\\
+	{\scriptsize \textcolor{CvIcon}{\textsc{Liceo Scientifico Statale Bruno Touschek}}} 
+	{\scriptsize \begin{itemize}
+			\item[-] School-leaving examination mark: \textcolor{CvColor}{90/100}
+			\item[-] Graduation date: \textit{2012}
+	\end{itemize}}
+	
+\end{itemize}
+
+
+\end{tcolorbox}
+\end{paracol}
+\newpage
+
+% ======================================================================= %
+% Page #2
+% ======================================================================= %
+\begin{paracol}{2}
+
+\begin{tcolorbox}[colback=CvSidebarBackColor,height=\textheight,boxrule=1pt, left=0pt,right=1pt,top=0pt,bottom=0pt, arc=0pt,outer arc=0pt, colframe=CvSidebarBackColor]
+	
+\vspace{0.5cm}	
+
+% ======================================================================= %
+% Page #2 - Sidebar
+% ======================================================================= %
+
+
+	
+\begin{center}	
+		
+\CvSidebarSection{\faLaptopCode}{Programming/Markup Languages}
+
+{\scriptsize 	\begin{tabular}{lcc|c}
+		&& \multirow{2}{*}{\textcolor{CvColor!50}{\faClock}} & \multirow{2}{*}{\textcolor{CvColor!50}{\faCalendar*}} \\
+		&& \multirow{2}{*}{\tiny \textbf{Years}} & \multirow{2}{*}{\tiny \textbf{Last time}} \\
+		&& {\tiny \textbf{of use}} & {\tiny \textbf{used}} \\
+		\\
+		{\texttt{C}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 2 & 2020 \\[5pt]
+		{\texttt{C++}} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2012 \\[5pt]
+		{\texttt{C\#}} & $\FullBlock\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2023 \\[5pt]
+		{\texttt{Java}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 2 & 2020 \\[5pt]
+		{\texttt{Go}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2022 \\[5pt]
+		{\texttt{Python}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2021 \\[5pt]
+		{\texttt{Assembly}} & \multirow{2}{*}{$\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$} & \multirow{2}{*}{0.5} & \multirow{2}{*}{2015} \\
+		{\texttt{MIPS}} & & \\[5pt]
+		{\texttt{Assembly}} & \multirow{2}{*}{$\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$} & \multirow{2}{*}{0.5} & \multirow{2}{*}{2020} \\
+		{\texttt{x86}} & & \\[5pt]
+		{\texttt{HTML}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 2 & 2023 \\[5pt]
+		{\texttt{CSS}} & $\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2023 \\[5pt]
+		\texttt{JSON} & $\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 2 & 2023 \\[5pt]
+		\LaTeX & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 4 & 2023 \\\\\\
+	
+	\end{tabular}}
+
+\CvSidebarSection{\faStar}{Soft Skill}
+
+
+\skills{Problem-solving/5} \\	
+\vspace*{0.1cm}	
+\skills{Teamwork/3} \\
+\vspace*{0.1cm}		
+\skills{Time management/4} \\
+\vspace*{0.1cm}		
+\skills{Communication/3} \\
+\vspace{0.5cm}		
+
+\CvSidebarSection{\faTags}{Other}
+
+{\scriptsize \begin{tabular}{c}
+	\textcolor{CvColor}{\faPlaneDeparture} \\
+	Available for business travels \\\\
+	
+	\textcolor{CvColor}{\faGlobeEurope} \\ 
+	Available to relocate abroad \\
+	\worldflag[length=0.5cm, width=0.30cm]{EU} \textcolor{CvColor}{Europe only}
+\end{tabular}}
+
+
+\end{center}
+	
+	
+	
+\end{tcolorbox}
+\switchcolumn  %<--------
+\begin{tcolorbox}[colback=white, height=\textheight,colframe=white, top=0pt,bottom=0pt]
+		
+		
+% ================================================================================ %
+% Training
+% ================================================================================ %
+\vspace{0.3cm}	
+\CvSection{\faBook}{Training}
+
+\begin{itemize}
+	
+	\item \CompanyName{RabbitMQ usage in event driven architecture} \textcolor{CvColor}{|} {\scriptsize Remotely} \hfill \JobTimeRange{September 2022}\\
+	{\scriptsize \textcolor{CvIcon}{Training course at ALTEN Italia S.p.A.}} 
+\end{itemize}
+
+\CvSection{\faLaptop}{Computer Key Skills \textcolor{CvColor}{*}}
+\vspace{0.3cm}	
+
+{\scriptsize
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	 \TableHeader{Cloud} & Apache OpenWhisk \BasicLevel \Sep AWS EC2 \BasicLevel \Sep AWS Lambda  \BasicLevel \Sep AWS Step Functions \BasicLevel \Sep AWS CloudWatch \BasicLevel \Sep Power BI \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{DevOps and \newline Build automation} & git \MediumLevel \Sep Azure DevOps \BasicLevel \Sep JIRA Software \BasicLevel \Sep Travis CI \BasicLevel \Sep Maven \BasicLevel \Sep CMake \BasicLevel \Sep Jenkins  \BasicLevel \Sep SonarQube \BasicLevel \Sep NuGet \BasicLevel  \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Databases} & Microsoft SQL Server \MediumLevel \Sep PostgreSQL \MediumLevel \Sep InfluxDB \BasicLevel \Sep Apache Cassandra \BasicLevel \Sep Apache Kakfa \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{ORM} & Entity Framework \MediumLevel \Sep Hibernate \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{OS} & Microsoft Windows \MediumLevel \Sep Kubuntu \MediumLevel \Sep KDE Neon \MediumLevel \Sep Manjaro \MediumLevel \Sep Arch Linux \MediumLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Web Programming} & Blazor \MediumLevel \Sep MudBlazor \MediumLevel \Sep JSP \BasicLevel \Sep Bootstrap \MediumLevel \Sep Single Page Apps \MediumLevel \Sep RESTful API \MediumLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Desktop\newline Programming} & WPF \MediumLevel \Sep JavaFX \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Shell and \newline Scripting} & Bash \MediumLevel \Sep PowerShell \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{IDE} & Android Studio \BasicLevel \Sep CLion \MediumLevel \Sep IntelliJ IDEA Community Edition \MediumLevel \Sep GoLand \MediumLevel \Sep PyCharm Community Edition \MediumLevel \Sep Visual Studio \MediumLevel \Sep Google Colaboratory (Colab) \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Testing} & JUnit \BasicLevel \Sep MSTest \BasicLevel \Sep Moq \BasicLevel \Sep Mockito \BasicLevel \Sep TDD \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Virtualization} & Hyper-V \BasicLevel \Sep VirtualBox \BasicLevel \Sep Docker \MediumLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Others} & .NET 6 \MediumLevel \Sep .NET Framework 4.x \MediumLevel    \Sep Apache ZooKeeper \MediumLevel \Sep Valgrind \BasicLevel \Sep \texttt{lp\_solve} \BasicLevel \Sep  Gurobi \BasicLevel \Sep Some deep learning libraries (\texttt{TensorFlow} and \texttt{Keras}) \BasicLevel \Sep RabbitMQ \BasicLevel \Sep UML \BasicLevel \\
+\end{tabular}
+}
+
+\begin{flushright}
+	{\tiny \textcolor{CvColor}{(*)} \hspace{0.05cm} \BasicLevel (Beginner) \Sep \MediumLevel (Intermediate) \Sep \MasterLevel (Advanced)}
+\end{flushright}
+	
+\end{tcolorbox}
+\end{paracol}
+
+
+
 	
 	
 
