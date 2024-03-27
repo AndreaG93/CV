@@ -62,6 +62,10 @@
 	\end{picture}%
 }
 
+\newcommand{\Color}[1]{\textcolor{CvColor}{#1}}
+
+
+
 \newcommand{\Map}{\textcolor{CvColor}{\faMapMarker*}}
 \newcommand{\Calendar}{\textcolor{CvColor!50}{\faCalendar*}}
 
@@ -78,7 +82,7 @@
 
 
 \newcommand{\CompanyName}[1]{\textsc{{\small #1}}}
-\newcommand{\JobTimeRange}[1]{{\footnotesize \textcolor{CvColor!50}{\faCalendar*} \hspace{0.01cm} #1}}
+\newcommand{\JobTimeRange}[1]{{\scriptsize \textcolor{CvColor!50}{\faCalendar*} \hspace{0.01cm} \textcolor{CvIcon}{#1}}}
 \newcommand{\JobLocation}[1]{{\footnotesize \textcolor{CvColor!50}{\faMapMarker*} \hspace{0.01cm} #1}}
 
 % To add level to skill...
@@ -202,12 +206,17 @@
 
 \vspace{0.5cm}
 \begin{quotation}
-{\scriptsize 	Seeking a position that allows me allow me to develop and design  software with ever greater autonomy.
-			I want to learn and apply DevOps development principles, in
-			order to ensure higher quality and maintainability of the
-			released software.	}
+{\footnotesize 
+		Self-independent and proactive .NET Developer with experience in desktop and single page web application development with a willingness to learn and master back-end development, microservices \& containerisation and cloud technologies.\newline
+		
+		Professional in desktop application development using WPF with a focus on quality, testability and maintainability of the released software.\newline
+		
+		Proficient in developing databases, creating user interfaces, troubleshooting issues and implementing new feature based on user feedback.\newline
+			
+		I would like to work with and build application for Linux.
+		
+	}
 \end{quotation}
-\vspace{0.5cm}
 
 \CvSidebarSection{\faInfoCircle}{Info}
 
@@ -272,47 +281,66 @@
 				\begin{itemize}
 					
 					% ====================================================================== %
-					\item \SubCompanyName{Telsy Elettronica e Telecomunicazioni S.p.A.} \textcolor{CvColor}{|} {\scriptsize Rome, Italy} \hfill \JobTimeRange{September 2023 - Ongoing}\\			
+					\item \SubCompanyName{Telsy Elettronica e Telecomunicazioni S.p.A.} \textcolor{CvColor}{|} {\scriptsize Rome, Italy} \hfill \JobTimeRange{September 2023 - Ongoing}\\	
+					{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Full Stack Developer}}\\		
 					% ====================================================================== %
 					
-					To develop a desktop application for Microsoft Windows that allows users to exchange data in a secure way.
+					I developed a desktop application for Microsoft Windows that allows users to exchange data in a secure way. I currently work to an enterprise application providing some security services.
 					
 					\begin{itemize}
-						\item Acted as a developer and tester.
-						\item Updated technical and business documentation.
+						\item Acted as software developer and tester.
+						\item Updated technical and business documentations.
 						\item Performed bug fixing.
 					\end{itemize}
 					
 					\textcolor{CvColor}{Results:}
 					\begin{itemize}
-						\item[\CvCheck] Acquired knowledge about Windows Presentation Foundation (WPF).
-						\item[\CvCheck] Improved knowledge about \texttt{git}, Jenkins pipelines, GitLab and SonarQube.
+						\item Improved reliability of released software introducing several unit and integration tests.
+						\item Improved user interface of developed software. 
+						\item Designed and released several libraries in order to reduce time and cost development.
+						\item Deadlines met.
+					\end{itemize}
+					
+					\textcolor{CvColor}{Acquired skills:}
+					\begin{itemize}
+						\item[\CvCheck] I acquired an extensive knowledge about \Color{Windows Presentation Foundation} (WPF). 
+						\item[\CvCheck] I started to interact with \Color{Microsoft Active Directory} and \Color{LDAP} protocol integrating them with developed software.
+						\item[\CvCheck] Improved knowledge about \Color{\texttt{git}}, \Color{Jenkins pipelines}, \Color{GitLab}, \Color{SonarQube} and \Color{Microsoft SQL Server}.
+					
 					\end{itemize}
 					
 					% ====================================================================== %
 					\vspace*{0.2cm}
-					\item \SubCompanyName{GF Machining Solutions S.p.A.} \textcolor{CvColor}{|} {\scriptsize Meyrin, Switzerland} \hfill \JobTimeRange{June 2023 - September 2023}\\			
+					\item \SubCompanyName{GF Machining Solutions S.p.A.} \textcolor{CvColor}{|} {\scriptsize Meyrin, Switzerland} \hfill \JobTimeRange{June 2023 - September 2023}\\	
+					{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Front End Developer}}\\		
 					% ====================================================================== %
 					
-					To develop a web application that allows users to setup and manage laser industrial machines.
+					To develop a web application which allows users to setup and manage laser industrial machines.
 					
 					\begin{itemize}
-						\item Acted as a developer.
+						\item Acted as software developer.
 						\item Updated technical documentation.
 						\item Performed bug fixing.
 					\end{itemize}
 					
 					\textcolor{CvColor}{Results:}
 					\begin{itemize}
-						\item[\CvCheck] Significanlty improved knowledge about C\#, \texttt{git}, Azure DevOps and Blazor.
-						\item[\CvCheck] Slightly improved my confidence in spoken English.
-						\item[\CvCheck] Slightly improved my ability to teamwork.
+						\item Improved user interface of developed software. 
+						\item Deadlines met.
+					\end{itemize}
+					
+					\textcolor{CvColor}{Acquired skills:}
+					\begin{itemize}
+						\item[\CvCheck] Significanlty improved knowledge about \Color{C\#}, \Color{\texttt{git}}, \Color{Azure DevOps} and \Color{Blazor}/\Color{MudBlazor}.
+						\item[\CvCheck] Slightly improved my confidence in spoken English and my ability to teamwork.
+						\item[\CvCheck] I acquired a little experience with \Color{Scrum} as agile project management. 
 					\end{itemize}
 					
 					% ====================================================================== %
 					\vspace*{0.2cm}
 					\item \SubCompanyName{ABB S.p.A.} \textcolor{CvColor}{|} {\scriptsize Rome, Italy} \hfill
-					\JobTimeRange{June 2022 - June 2023}\\			
+					\JobTimeRange{June 2022 - June 2023}\\	
+					{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Full Stack Developer}}\\		
 					% ====================================================================== %
 					
 					To develop web applications to perform several task like data management, report extraction, scheduling activities and production monitoring.
@@ -323,11 +351,19 @@
 						\item Started initiatives aimed at improving software development process.
 						\item Performed bug fixing.
 					\end{itemize}
+					
 					\textcolor{CvColor}{Results:}
 					\begin{itemize}
-						\item[\CvCheck] Acquired knowledge of several technologies and tools among which ``Entity Framework", Blazor, CSS, C\# and Azure DevOps.
-						\item[\CvCheck] Improved interpersonal skills.
-						\item[\CvCheck] Improved ability to work independently.
+						\item Improved user interface of developed software. 
+						\item Deadlines met.
+						\item Supervised and mentored junior developers.
+					\end{itemize}
+					
+					
+					\textcolor{CvColor}{Acquired skills:}
+					\begin{itemize}
+						\item[\CvCheck] I acquired significant knowledge about following technologies and tools: \Color{C\#} programming language, \Color{.NET Core 6}, \Color{Entity Framework}, \Color{Blazor}, \Color{CSS} and \Color{Azure DevOps}.
+						\item[\CvCheck] Improved interpersonal skills and my ability to work independently.
 						\item[\CvCheck] Deadlines met with customer satisfaction. 
 					\end{itemize}						
 				\end{itemize}
@@ -400,20 +436,20 @@
 		&& \multirow{2}{*}{\tiny \textbf{Years}} & \multirow{2}{*}{\tiny \textbf{Last time}} \\
 		&& {\tiny \textbf{of use}} & {\tiny \textbf{used}} \\
 		\\
-		{\texttt{C}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 2 & 2020 \\[5pt]
-		{\texttt{C++}} & $\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2012 \\[5pt]
-		{\texttt{C\#}} & $\FullBlock\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2023 \\[5pt]
-		{\texttt{Java}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 2 & 2020 \\[5pt]
-		{\texttt{Go}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2022 \\[5pt]
-		{\texttt{Python}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 1.5 & 2021 \\[5pt]
-		{\texttt{Assembly}} & \multirow{2}{*}{$\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$} & \multirow{2}{*}{0.5} & \multirow{2}{*}{2015} \\
+		{\texttt{C}} & $\FullBlock\FullBlock\EmptyBlock$ & 2 & 2020 \\[5pt]
+		{\texttt{C++}} & $\FullBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2012 \\[5pt]
+		{\texttt{C\# 11}} & $\FullBlock\FullBlock\EmptyBlock$ & 1.5 & Ongoing \\[5pt]
+		{\texttt{Java SE 12}} & $\FullBlock\FullBlock\EmptyBlock$ & 2 & 2020 \\[5pt]
+		{\texttt{Go 1.17}} & $\FullBlock\FullBlock\EmptyBlock$ & 1.5 & 2022 \\[5pt]
+		{\texttt{Python 3.x}} & $\FullBlock\FullBlock\EmptyBlock$ & 1.5 & 2021 \\[5pt]
+		{\texttt{Assembly}} & \multirow{2}{*}{$\FullBlock\EmptyBlock\EmptyBlock$} & \multirow{2}{*}{0.5} & \multirow{2}{*}{2015} \\
 		{\texttt{MIPS}} & & \\[5pt]
-		{\texttt{Assembly}} & \multirow{2}{*}{$\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$} & \multirow{2}{*}{0.5} & \multirow{2}{*}{2020} \\
+		{\texttt{Assembly}} & \multirow{2}{*}{$\FullBlock\EmptyBlock\EmptyBlock$} & \multirow{2}{*}{0.5} & \multirow{2}{*}{2020} \\
 		{\texttt{x86}} & & \\[5pt]
-		{\texttt{HTML}} & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 2 & 2023 \\[5pt]
-		{\texttt{CSS}} & $\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2023 \\[5pt]
-		\texttt{JSON} & $\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 2 & 2023 \\[5pt]
-		\LaTeX & $\FullBlock\FullBlock\FullBlock\EmptyBlock\EmptyBlock\EmptyBlock$ & 4 & 2023 \\\\\\
+		{\texttt{HTML}} & $\FullBlock\EmptyBlock\EmptyBlock$ & 2 & 2023 \\[5pt]
+		{\texttt{CSS}} & $\FullBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2023 \\[5pt]
+		\texttt{JSON} & $\FullBlock\EmptyBlock\EmptyBlock$ & 2 & 2023 \\[5pt]
+		\LaTeX & $\FullBlock\EmptyBlock\EmptyBlock$ & 4 & 2023 \\\\\\
 	
 	\end{tabular}}
 
