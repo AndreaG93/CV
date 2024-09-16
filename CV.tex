@@ -139,12 +139,7 @@
 % -------------------------------------------------------------------------------- %
 \def\JobDescriptionLineSpace{0.7}
 
-\tikzset{
-	path image/.style={
-		path picture={
-			\node at (path picture bounding box.center) {
-				\includegraphics[height=3.5cm]{./Images/dd.jpg}};}}
-}
+
 
 
 \newcommand{\Sep}{\textcolor{CvColor}{|}\hspace{0.1cm}}
@@ -153,15 +148,7 @@
 \definecolor{gray}{HTML}{4D4D4D}
 \definecolor{maingray}{HTML}{B9B9B9}
 
-\newcommand\skills[1]{ 
-	\begin{tikzpicture}
-		\foreach [count=\i] \x/\y in {#1}{
-			\draw[fill=CvColor,maingray] (0,\i) rectangle (6*0.7,\i+0.20);
-			\draw[shading = axis, right color=CvColor!10!CvColor, left color=white!40!CvColor,shading angle=180](0,\i) rectangle (\y*0.7,\i+0.20);
-			\node[above right] at (0,\i+0.25) {{\scriptsize \x}};
-		}
-	\end{tikzpicture}
-}
+
 
 \newcommand{\SkillAsBlock}[1]{
 	$\foreach \n in {1,...,#1}{\FullBlock} \foreach \n in {#1,...,4}{\EmptyBlock}$	
@@ -178,7 +165,7 @@
 
 \begin{document}
 
-\columnratio{.32}
+\columnratio{.28}
 \begin{paracol}{2}
 	
 % ======================================================================= %
@@ -193,7 +180,7 @@
 % ======================================================================= %
 \begin{center}	
 
-\roundpic{6cm}{8cm}{./Images/Photo.jpg}
+\roundpic{3.5cm}{5cm}{./Images/Photo.jpg}
 
 \vspace{0.5cm}
 
@@ -204,24 +191,14 @@
 \vspace{0.5cm}
 \begin{quotation}
 {\footnotesize 
-		Self-independent and proactive .NET Developer with experience in \textit{desktop} and \textit{single page web application}  with a focus on \textbf{quality}, \textbf{testability} and \textbf{maintainability} of the released software. \newline
+		Self-independent and proactive full stack .NET developer with 2+ years of experience.\newline
 		
-		Proficient in developing databases, creating user friendly interfaces, troubleshooting issues and implementing new feature based on user feedback.\newline
+		I developed both \textit{desktop} and \textit{client server web application}, dealing with database, business logic and UI,	with a focus on \textit{quality} and  \textit{testability} of the released software. 
 		
-		%I like develop deskotp
+		I can handle all phases of the software development life cycle.\newline
 		
-		%have some experience with some CI/CD tools
-		
-		
-		
-		%development with a willingness to learn and master back-end development, microservices \& containerisation and cloud technologies.\newline
-		
-		
-		
-		
-			
-		%I would like to work with and build application for Linux.
-		
+		Despite I really like dealing with UI, I wish to improve my knowledge about back-end development and databases, exploring new \textit{system architectures} in order to grow as a software engineer and build high-quality solutions.
+				
 	}
 \end{quotation}
 
@@ -229,10 +206,8 @@
 
 {\scriptsize 	
 	\begin{tabular}{cl}
-			\textcolor{CvColor}{\faUser[light]} & 27 August 1993 \\[5pt]
-		
-			\textcolor{CvColor}{\faMapMarker*[light]} & \href{https://www.google.com/maps/place/41.8093516,12.7373629}{Viale S. Francesca Saverio Cabrini, 8} \\
-			& \href{https://www.google.com/maps/place/41.8093516,12.7373629}{00077 Monte Compatri (RM), Italy} \\[5pt]
+			
+			\textcolor{CvColor}{\faMapMarker*[light]} &  Rome, Italy \\[5pt]
 		
 			\textcolor{CvColor}{\faPhone*[light]} & \textcolor{CvSidebarTextColor}{\href{tel:393337858512}{+(39)~333~78~58~512}} \\[5pt]
 			
@@ -243,9 +218,7 @@
 			\textcolor{CvColor}{\faLinkedin} & \href{https://it.linkedin.com/in/andrea-graziani-5134b8256}{\textcolor{CvSidebarTextColor}{\texttt{andrea-graziani-5134b8256}}} \\[5pt]
 			
 			\textcolor{CvColor}{\faCar[light]} & Driving Licence B \\
-			& \CvBulletForSidebar \textit{{\scriptsize Car Available}} \\[5pt]
-			
-			\textcolor{CvColor}{\faFlag[light]} & Italian \\\\
+			& \CvBulletForSidebar \textit{{\scriptsize Car Available}} \\\\
 	\end{tabular}
 }
 
@@ -287,91 +260,98 @@
 				\begin{itemize}
 					
 					% ====================================================================== %
-					\item \SubCompanyName{Telsy Elettronica e Telecomunicazioni S.p.A.} \textcolor{CvColor}{|} {\scriptsize Rome, Italy} \hfill \JobTimeRange{September 2023 - Ongoing}\\	
-					{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Full Stack Developer}}\\		
+					\item \SubCompanyName{Telsy S.p.A.} \textcolor{CvColor}{|} {\scriptsize Rome, Italy} \hfill \JobTimeRange{September 2023 - Ongoing}\\	
+					{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Full Stack Developer}}		
 					% ====================================================================== %
 					
-					I developed a desktop application for Microsoft Windows that allows users to exchange data in a secure way. I currently work to an enterprise application providing some security services.
-					
 					\begin{itemize}
-						\item Acted mostly as software developer and tester.
-						\item Setup CI/CD pipelines.
-						\item Updated technical and business documentations.
-						\item Performed bug fixing.
+						\item I contributed to the development of two enterprise level desktop applications for Microsoft Windows concerning data encryption: 
+						
+						\begin{itemize}
+							\item The first one aims to enable users to exchange data in a secure way exploiting \textit{one-time pad} (OTP) as encryption technique
+							
+							\item The last one is designed to allow cryptographic keys exchange between clients
+						\end{itemize}
+									
+						\item I was involved in designing and developing the database schema, the stored procedures and the UI for both applications, performing several bug fixes
+						
+						\item I set up CI/CD pipelines
+						
+						\item I updated technical and business documentations
+						
+						\item I improved the reliability of released software by leveraging static software analysis tools and designing and developing unit and integration tests
 					\end{itemize}
 					
 					\textcolor{CvColor}{Results:}
 					\begin{itemize}
-						\item Improved reliability of released software introducing several unit and integration tests.
-						\item Improved user interface of developed software. 
-						\item Designed and released several libraries in order to reduce time and cost development.
-						\item Deadlines met.
+						\item Designed and developed an UI library in order to speed up desktop software development
+						\item Deadlines met
 					\end{itemize}
-					
+
 					\textcolor{CvColor}{Acquired skills:}
 					\begin{itemize}
-						\item[\CvCheck] I acquired an extensive knowledge about \Color{Windows Presentation Foundation} (WPF). 
-						\item[\CvCheck] I started to interact with \Color{Microsoft Active Directory} and \Color{LDAP} protocol integrating them with developed software.
-						\item[\CvCheck] Improved knowledge about \Color{\texttt{git}}, \Color{Jenkins pipelines}, \Color{GitLab}, \Color{SonarQube}, \Color{Microsoft SQL Server} and \Color{T-SQL} domain language.
+						\item[\CvCheck] I acquired an extensive knowledge about \Color{Windows Presentation Foundation} (WPF)
+						\item[\CvCheck] I started to interact with \Color{Microsoft Active Directory} and \Color{LDAP} protocol integrating them with developed software
+						\item[\CvCheck] Improved knowledge about \Color{C\#}, \Color{\texttt{git}}, \Color{Jenkins}, \Color{GitLab}, \Color{SonarQube}, \Color{Jira}, \Color{Microsoft SQL Server} and \Color{T-SQL} domain language
 					
 					\end{itemize}
 					
 					% ====================================================================== %
 					\vspace*{0.2cm}
 					\item \SubCompanyName{GF Machining Solutions S.p.A.} \textcolor{CvColor}{|} {\scriptsize Meyrin, Switzerland} \hfill \JobTimeRange{June 2023 - September 2023}\\	
-					{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Front End Developer}}\\		
+					{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Front End Developer}}	
 					% ====================================================================== %
 					
-					To develop a web application which allows users to setup and manage laser industrial machines.
-					
 					\begin{itemize}
-						\item Acted as software developer.
-						\item Updated technical documentation.
-						\item Performed bug fixing.
-					\end{itemize}
+						\item I participated to the development of a \textit{client-server} web application which enable users to setup and manage laser industrial machines
+								
+						\item I designed and developed the UI for several application sub-modules, performing several bug fixes and wrote unit tests
+						
+						\item I updated technical documentation
 					
-					\textcolor{CvColor}{Results:}
-					\begin{itemize}
-						\item Improved user interface of developed software. 
-						\item Deadlines met.
 					\end{itemize}
 					
 					\textcolor{CvColor}{Acquired skills:}
 					\begin{itemize}
-						\item[\CvCheck] Significanlty improved knowledge about \Color{C\#}, \Color{\texttt{git}}, \Color{Azure DevOps} and \Color{Blazor}/\Color{MudBlazor}.
-						\item[\CvCheck] Slightly improved my confidence in spoken English and my ability to teamwork.
-						\item[\CvCheck] I acquired a little experience with \Color{Scrum} as agile project management. 
+						\item[\CvCheck] Significanlty improved knowledge about \Color{C\#}, \Color{\texttt{git}}, \Color{Azure DevOps} and \Color{Blazor}/\Color{MudBlazor}
+						\item[\CvCheck] Slightly improved my confidence in spoken English and my ability to teamwork
 					\end{itemize}
 					
 					% ====================================================================== %
 					\vspace*{0.2cm}
 					\item \SubCompanyName{ABB S.p.A.} \textcolor{CvColor}{|} {\scriptsize Rome, Italy} \hfill
 					\JobTimeRange{June 2022 - June 2023}\\	
-					{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Full Stack Developer}}\\		
+					{\scriptsize \textcolor{CvIcon}{as} \textcolor{CvColor}{Full Stack Developer}}	
 					% ====================================================================== %
 					
-					To develop web applications to perform several task like data management, report extraction, scheduling activities and production monitoring.
 					\begin{itemize}
-						\item Acted as software designer, developer, tester and coordinator of the projects.
-						\item Performed requirements gathering and technical documentation.
-						\item Handled production deployment, testing and technical support.
-						\item Started initiatives aimed at improving software development process.
-						\item Performed bug fixing.
+						
+						\item I developed two web-based management applications, both based on \textit{client-server} architecture:
+						\begin{itemize}
+							\item The first one is designed for data gathering and management, report extraction, scheduling activities and production monitoring of the ABB site of Rome
+							\item The last one was designed to monitor the activities done by suppliers of ABB.
+						\end{itemize}
+								
+						\item I performed requirements gathering, taking care of the technical documentation
+						
+						\item I designed and developed the business logic, the database schema and the UI of both the applications
+						
+						\item Handled production deployment and provided technical support to users
+						
+						\item Improved software quality by introducing static code analysis into the development process
+						
+						\item Supervised and mentored junior developers
 					\end{itemize}
 					
 					\textcolor{CvColor}{Results:}
 					\begin{itemize}
-						\item Improved user interface of developed software. 
-						\item Deadlines met.
-						\item Supervised and mentored junior developers.
+						\item Deadlines met with customer satisfaction
 					\end{itemize}
-					
 					
 					\textcolor{CvColor}{Acquired skills:}
 					\begin{itemize}
-						\item[\CvCheck] I acquired significant knowledge about following technologies and tools: \Color{C\#} programming language, \Color{.NET Core 6}, \Color{Entity Framework}, \Color{Blazor}, \Color{CSS} and \Color{Azure DevOps}.
-						\item[\CvCheck] Improved interpersonal skills and my ability to work independently.
-						\item[\CvCheck] Deadlines met with customer satisfaction. 
+						\item[\CvCheck] I acquired significant knowledge about several technologies like \Color{C\#}, \Color{SQL}, \Color{.NET Core 6}, \Color{Entity Framework}, \Color{Blazor}, \Color{CSS}, \Color{HTML} and \Color{Azure DevOps}
+						\item[\CvCheck] Improved interpersonal skills and my ability to work independently 
 					\end{itemize}						
 				\end{itemize}
 			}
@@ -428,6 +408,7 @@
 		{\texttt{CSS}} & $\FullBlock\EmptyBlock\EmptyBlock$ & 0.5 & 2023 \\[5pt]
 		\texttt{JSON} & $\FullBlock\EmptyBlock\EmptyBlock$ & 2 & 2023 \\[5pt]
 		\texttt{XML} & $\FullBlock\EmptyBlock\EmptyBlock$ & 1 & Ongoing \\[5pt]
+		Rust & $\FullBlock\EmptyBlock\EmptyBlock$ & 0.1 & Ongoing \\[5pt]
 		\LaTeX & $\FullBlock\FullBlock\EmptyBlock$ & 4 & Ongoing \\\\\\
 	
 	\end{tabular}}
@@ -437,17 +418,7 @@
 
 \vspace{0.5cm}	
 
-\CvSidebarSection{\faTags}{Other}
-
-{\scriptsize \begin{tabular}{c}
-	\textcolor{CvColor}{\faPlaneDeparture} \\
-	Available for business travels \\\\
-	
-	\textcolor{CvColor}{\faGlobeEurope} \\ 
-	Available to relocate abroad \\
-	\worldflag[length=0.5cm, width=0.30cm]{EU} \textcolor{CvColor}{Europe only}
-\end{tabular}}
-
+%\CvSidebarSection{\faTags}{Other}
 
 \end{center}
 	
@@ -473,8 +444,6 @@
 			\item[-] Age at graduation: \textit{28} \CvBullet Graduation date: \textit{23/05/2022}	
 	\end{itemize}}
 	
-	\vspace*{0.2cm}
-	
 	\item \CompanyName{Bachelor's degree} \textcolor{CvColor}{|} {\scriptsize Computer engineering} \hfill \JobTimeRange{2012 - 2018}\\
 	{\scriptsize \textcolor{CvIcon}{\textsc{Università degli Studi di Roma ``Tor Vergata''}}} \\
 	{\scriptsize \textcolor{CvIcon}{\textsc{L-8 - 1st level degree in Information technology}}}
@@ -482,15 +451,9 @@
 			\item[-] Final degree mark: \textcolor{CvColor}{102/110}
 			\item[-] Age at graduation: \textit{25} \CvBullet Graduation date: \textit{26/10/2018}	
 	\end{itemize}}
-	
-	\vspace*{0.2cm}
-	
-	\item \CompanyName{Italian Secondary School Diploma} \textcolor{CvColor}{|} {\scriptsize Scientific Certificate} \hfill \JobTimeRange{2012}\\
-	{\scriptsize \textcolor{CvIcon}{\textsc{Liceo Scientifico Statale Bruno Touschek}}} 
-	{\scriptsize \begin{itemize}
-			\item[-] School-leaving examination mark: \textcolor{CvColor}{90/100}
-			\item[-] Graduation date: \textit{2012}
-	\end{itemize}}
+		
+
+
 	
 \end{itemize}	
 	
@@ -504,60 +467,92 @@
 \begin{itemize}
 	
 	\item \CompanyName{RabbitMQ usage in event driven architecture} \textcolor{CvColor}{|} {\scriptsize Remotely} \hfill \JobTimeRange{September 2022}\\
-	{\scriptsize \textcolor{CvIcon}{Training course at ALTEN Italia S.p.A.}} 
+	{\scriptsize \textcolor{CvIcon}{Provided by ALTEN Italia S.p.A.}}
+	
+	\item \CompanyName{Secure Coding} \textcolor{CvColor}{|} {\scriptsize Remotely} \hfill \JobTimeRange{July 2024}\\
+	{\scriptsize \textcolor{CvIcon}{Provided by ALTEN Italia S.p.A.}} 
+
 \end{itemize}
 
 \vspace{0.3cm}	
-\CvSection{\faLaptop}{Computer Key Skills \textcolor{CvColor}{*}}	
+\CvSection{\faLaptop}{Computer Skills \textcolor{CvColor}{*}}	
 
 {\scriptsize
+	
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Web \newline Programming \newline frameworks} & Blazor \MediumLevel \Sep MudBlazor \MediumLevel \Sep Bootstrap \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Desktop\newline Programming \newline frameworks} & Windows Presentation Foundation \MediumLevel \Sep JavaFX \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Testing frameworks} & JUnit \BasicLevel \Sep Mockito \BasicLevel \Sep MSTest \MediumLevel \Sep NUnit \MediumLevel \Sep Moq \MediumLevel  \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Virtualization and \newline containerization} & Docker \MediumLevel \Sep Hyper-V \BasicLevel \Sep VirtualBox \BasicLevel  \\\\
+\end{tabular}	
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Message oriented middle-wares} & RabbitMQ \BasicLevel \Sep MSMQ \BasicLevel \Sep Redis Pub/Sub \BasicLevel \\\\
+\end{tabular}
+	
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{System styles \newline and \newline architectures} & Client-server \MediumLevel \Sep Serverless \BasicLevel \Sep RESTful \BasicLevel \Sep Cloud-native \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{RDBMS} & Microsoft SQL Server \MediumLevel \Sep PostgreSQL \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{TSDB} & InfluxDB \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{ORM \newline frameworks} & Entity Framework \MediumLevel \Sep Hibernate \BasicLevel \\\\
+\end{tabular}
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Shell and \newline Scripting} & Bash \MediumLevel \Sep PowerShell \BasicLevel \\\\
+\end{tabular}	
+	
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{Modelling tools} & UML \MediumLevel \Sep Draw.io \MediumLevel \Sep Microsoft Visio \MediumLevel \Sep StarUML \BasicLevel \\\\
+\end{tabular}
+	
+	
 \begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
 	 \TableHeader{Cloud} & Apache OpenWhisk \BasicLevel \Sep AWS EC2 \BasicLevel \Sep AWS Lambda  \BasicLevel \Sep AWS Step Functions \BasicLevel \Sep AWS CloudWatch \BasicLevel \Sep Power BI \BasicLevel \\\\
 \end{tabular}
 
 \begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{DevOps and \newline Build automation} & git \MediumLevel \Sep Azure DevOps \BasicLevel \Sep JIRA Software \BasicLevel \Sep Travis CI \BasicLevel \Sep Maven \BasicLevel \Sep CMake \BasicLevel \Sep Jenkins  \BasicLevel \Sep SonarQube \BasicLevel \Sep NuGet \BasicLevel  \\\\
+	\TableHeader{DevOps, \newline build automation and tools} & Azure DevOps \BasicLevel \Sep Jenkins \MediumLevel \Sep Travis CI \BasicLevel \Sep SonarQube \MediumLevel \Sep Maven \BasicLevel \Sep CMake \BasicLevel \Sep NuGet \BasicLevel  \\\\
+\end{tabular}
+
+
+\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
+	\TableHeader{OS} & Microsoft Windows \MediumLevel \Sep Microsoft Windows Server \BasicLevel \Sep Kubuntu \MediumLevel \Sep KDE Neon \MediumLevel \Sep Manjaro \MediumLevel \Sep Arch Linux \MediumLevel \\\\
 \end{tabular}
 
 \begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{Databases} & Microsoft SQL Server \BasicLevel \Sep PostgreSQL \BasicLevel \Sep InfluxDB \BasicLevel \Sep Apache Cassandra \BasicLevel \Sep Apache Kakfa \BasicLevel \\\\
+	\TableHeader{IDE} & Android Studio \BasicLevel \Sep CLion \MediumLevel \Sep IntelliJ IDEA Community Edition \MediumLevel \Sep GoLand \MediumLevel \Sep PyCharm Community Edition \MediumLevel \Sep Visual Studio Enterprise \MediumLevel \Sep Google Colab \BasicLevel \\\\
 \end{tabular}
 
-\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{ORM} & Entity Framework \MediumLevel \Sep Hibernate \BasicLevel \\\\
-\end{tabular}
+
+
+
+
+
+
 
 \begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{OS} & Microsoft Windows \MediumLevel \Sep Kubuntu \MediumLevel \Sep KDE Neon \MediumLevel \Sep Manjaro \MediumLevel \Sep Arch Linux \MediumLevel \\\\
+	\TableHeader{Others} & Git \MasterLevel \Sep .NET Core \MediumLevel \Sep .NET Framework 4.x \MediumLevel \Sep Apache ZooKeeper \MediumLevel \Sep Valgrind \BasicLevel \Sep \texttt{lp\_solve} \BasicLevel \Sep  Gurobi \BasicLevel \Sep JIRA Software \BasicLevel \\
 \end{tabular}
 
-\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{Web Programming} & Blazor \MediumLevel \Sep MudBlazor \MediumLevel \Sep JSP \BasicLevel \Sep Bootstrap \MediumLevel \Sep Single Page Apps \MediumLevel \Sep RESTful API \MediumLevel \\\\
-\end{tabular}
 
-\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{Desktop\newline Programming} & WPF \MediumLevel \Sep JavaFX \BasicLevel \\\\
-\end{tabular}
-
-\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{Shell and \newline Scripting} & Bash \MediumLevel \Sep PowerShell \BasicLevel \\\\
-\end{tabular}
-
-\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{IDE} & Android Studio \BasicLevel \Sep CLion \MediumLevel \Sep IntelliJ IDEA Community Edition \MediumLevel \Sep GoLand \MediumLevel \Sep PyCharm Community Edition \MediumLevel \Sep Visual Studio \MediumLevel \Sep Google Colaboratory (Colab) \BasicLevel \\\\
-\end{tabular}
-
-\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{Testing} & JUnit \BasicLevel \Sep MSTest \BasicLevel \Sep Moq \BasicLevel \Sep Mockito \BasicLevel \Sep TDD \BasicLevel \\\\
-\end{tabular}
-
-\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{Virtualization} & Hyper-V \BasicLevel \Sep VirtualBox \BasicLevel \Sep Docker \MediumLevel \\\\
-\end{tabular}
-
-\begin{tabular}{p{\ComputerSkillGroupColumn}p{\ComputerSkillColumn}}
-	\TableHeader{Others} & .NET 6 \MediumLevel \Sep .NET Framework 4.x \MediumLevel    \Sep Apache ZooKeeper \MediumLevel \Sep Valgrind \BasicLevel \Sep \texttt{lp\_solve} \BasicLevel \Sep  Gurobi \BasicLevel \Sep Some deep learning libraries (\texttt{TensorFlow} and \texttt{Keras}) \BasicLevel \Sep RabbitMQ \BasicLevel \Sep UML \BasicLevel \\
-\end{tabular}
 }
 
 \begin{flushright}
@@ -567,24 +562,4 @@
 \end{tcolorbox}
 \end{paracol}
 
-
-
-	
-	
-
-	
-	
-	
-	
-	
 \end{document}
-
-
-
-
-
-
-
-
-
-
